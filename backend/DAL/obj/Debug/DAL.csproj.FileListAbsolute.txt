@@ -1,0 +1,14 @@
+D:\Projects\Green-Leaf-A-React-And-ASP.NET-Web-Api-Web-Application\backend\DAL\bin\Debug\DAL.dll
+D:\Projects\Green-Leaf-A-React-And-ASP.NET-Web-Api-Web-Application\backend\DAL\bin\Debug\DAL.pdb
+D:\Projects\Green-Leaf-A-React-And-ASP.NET-Web-Api-Web-Application\backend\DAL\obj\Debug\DAL.csproj.AssemblyReference.cache
+D:\Projects\Green-Leaf-A-React-And-ASP.NET-Web-Api-Web-Application\backend\DAL\obj\Debug\DAL.csproj.CoreCompileInputs.cache
+D:\Projects\Green-Leaf-A-React-And-ASP.NET-Web-Api-Web-Application\backend\DAL\obj\Debug\DAL.dll
+D:\Projects\Green-Leaf-A-React-And-ASP.NET-Web-Api-Web-Application\backend\DAL\obj\Debug\DAL.pdb
+D:\Projects\Green-Leaf-A-React-And-ASP.NET-Web-Api-Web-Application\backend\DAL\bin\Debug\DAL.dll.config
+D:\Projects\Green-Leaf-A-React-And-ASP.NET-Web-Api-Web-Application\backend\DAL\bin\Debug\AutoMapper.dll
+D:\Projects\Green-Leaf-A-React-And-ASP.NET-Web-Api-Web-Application\backend\DAL\bin\Debug\EntityFramework.dll
+D:\Projects\Green-Leaf-A-React-And-ASP.NET-Web-Api-Web-Application\backend\DAL\bin\Debug\EntityFramework.SqlServer.dll
+D:\Projects\Green-Leaf-A-React-And-ASP.NET-Web-Api-Web-Application\backend\DAL\bin\Debug\AutoMapper.xml
+D:\Projects\Green-Leaf-A-React-And-ASP.NET-Web-Api-Web-Application\backend\DAL\bin\Debug\EntityFramework.xml
+D:\Projects\Green-Leaf-A-React-And-ASP.NET-Web-Api-Web-Application\backend\DAL\bin\Debug\EntityFramework.SqlServer.xml
+D:\Projects\Green-Leaf-A-React-And-ASP.NET-Web-Api-Web-Application\backend\DAL\obj\Debug\DAL.csproj.CopyComplete

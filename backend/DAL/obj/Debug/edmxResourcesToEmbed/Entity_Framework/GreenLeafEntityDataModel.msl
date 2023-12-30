@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="GreenLeafDatabaseModelStoreContainer" CdmEntityContainer="GreenLeafDatabaseEntities">
+    <EntitySetMapping Name="users">
+      <EntityTypeMapping TypeName="GreenLeafDatabaseModel.user">
+        <MappingFragment StoreEntitySet="user">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="first_name" ColumnName="first_name" />
+          <ScalarProperty Name="last_name" ColumnName="last_name" />
+          <ScalarProperty Name="date_of_birth" ColumnName="date_of_birth" />
+          <ScalarProperty Name="email_address" ColumnName="email_address" />
+          <ScalarProperty Name="password" ColumnName="password" />
+          <ScalarProperty Name="picture" ColumnName="picture" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

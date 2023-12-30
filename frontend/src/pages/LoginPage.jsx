@@ -12,11 +12,11 @@ import InputAdornment from "@mui/material/InputAdornment";
 import InputLabel from "@mui/material/InputLabel";
 import OutlinedInput from "@mui/material/OutlinedInput";
 import TextField from "@mui/material/TextField";
+import Typography from "@mui/material/Typography";
 import * as React from "react";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
 import * as yup from "yup";
-import Typography from "@mui/material/Typography";
 
 const schema = yup
   .object({
@@ -55,7 +55,7 @@ const LoginPage = () => {
         onSubmit={handleSubmit(onSubmit)}
         className="flex flex-col justify-center items-center h-screen"
       >
-        <Box className="flex flex-col w-1/2 space-y-5">
+        <Box className="flex flex-col w-96 space-y-5">
           <Typography variant="h4" className="text-center">
             Sign In
           </Typography>
