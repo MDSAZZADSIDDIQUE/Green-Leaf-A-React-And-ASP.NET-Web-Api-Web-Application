@@ -9,11 +9,12 @@ import Stepper from "@mui/material/Stepper";
 import Step from "@mui/material/Step";
 import StepLabel from "@mui/material/StepLabel";
 import Button from "@mui/material/Button";
-import Link from "@mui/material/Link";
 import Typography from "@mui/material/Typography";
 import AddressForm from "./AddressForm";
 import PaymentForm from "./PaymentForm";
 import Review from "./Review";
+
+import { Link } from "react-router-dom";
 
 function Copyright() {
   return (
@@ -97,9 +98,9 @@ export default function Checkout() {
                 confirmation, and will send you an update when your order has
                 shipped.
               </Typography>
-              <div className="mt-5">
+              <Link to="/yourorder">
                 <Button variant="contained">Your Orders</Button>
-              </div>
+              </Link>
             </React.Fragment>
           ) : (
             <React.Fragment>

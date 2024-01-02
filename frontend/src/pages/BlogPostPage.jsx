@@ -1,28 +1,33 @@
-import * as React from "react";
-import { styled, createTheme, ThemeProvider } from "@mui/material/styles";
-import CssBaseline from "@mui/material/CssBaseline";
-import MuiDrawer from "@mui/material/Drawer";
-import Box from "@mui/material/Box";
-import MuiAppBar from "@mui/material/AppBar";
-import Toolbar from "@mui/material/Toolbar";
-import List from "@mui/material/List";
-import Typography from "@mui/material/Typography";
-import Divider from "@mui/material/Divider";
-import IconButton from "@mui/material/IconButton";
-import Badge from "@mui/material/Badge";
-import Container from "@mui/material/Container";
-import Grid from "@mui/material/Grid";
-import Paper from "@mui/material/Paper";
-import Link from "@mui/material/Link";
-import MenuIcon from "@mui/icons-material/Menu";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import FavoriteIcon from "@mui/icons-material/Favorite";
+import MenuIcon from "@mui/icons-material/Menu";
+import MoreVertIcon from "@mui/icons-material/MoreVert";
 import NotificationsIcon from "@mui/icons-material/Notifications";
-import Chart from "./Chart";
-import Deposits from "./Deposits";
-import Orders from "./Orders";
-import Sidebar from "./Sidebar";
+import ShareIcon from "@mui/icons-material/Share";
+import MuiAppBar from "@mui/material/AppBar";
 import Avatar from "@mui/material/Avatar";
-import OrderTable from "../OrderTable";
+import Badge from "@mui/material/Badge";
+import Box from "@mui/material/Box";
+import Card from "@mui/material/Card";
+import CardActions from "@mui/material/CardActions";
+import CardContent from "@mui/material/CardContent";
+import CardHeader from "@mui/material/CardHeader";
+import CardMedia from "@mui/material/CardMedia";
+import Container from "@mui/material/Container";
+import CssBaseline from "@mui/material/CssBaseline";
+import Divider from "@mui/material/Divider";
+import MuiDrawer from "@mui/material/Drawer";
+import Grid from "@mui/material/Grid";
+import IconButton from "@mui/material/IconButton";
+import Link from "@mui/material/Link";
+import List from "@mui/material/List";
+import Toolbar from "@mui/material/Toolbar";
+import Typography from "@mui/material/Typography";
+import { red } from "@mui/material/colors";
+import { ThemeProvider, createTheme, styled } from "@mui/material/styles";
+import * as React from "react";
+import Sidebar from "./dashboard/Sidebar";
 
 function Copyright(props) {
   return (
@@ -88,10 +93,9 @@ const Drawer = styled(MuiDrawer, {
   },
 }));
 
-// TODO remove, this demo shouldn't need to reset the theme.
 const defaultTheme = createTheme();
 
-export default function Dashboard() {
+export default function BlogPostPage() {
   const [open, setOpen] = React.useState(true);
   const toggleDrawer = () => {
     setOpen(!open);
@@ -104,7 +108,7 @@ export default function Dashboard() {
         <AppBar position="absolute" open={open}>
           <Toolbar
             sx={{
-              pr: "24px", // keep right padding when drawer closed
+              pr: "24px",
             }}
           >
             <IconButton
@@ -128,10 +132,11 @@ export default function Dashboard() {
             >
               Dashboard
             </Typography>
-            <Avatar
-              aria-label="recipe"
-              src={`https://localhost:44369/api/getuser/fqzzx5yazu2`}
-            />
+            <IconButton color="inherit">
+              <Badge badgeContent={4} color="secondary">
+                <NotificationsIcon />
+              </Badge>
+            </IconButton>
           </Toolbar>
         </AppBar>
         <Drawer variant="permanent" open={open}>
@@ -167,37 +172,48 @@ export default function Dashboard() {
           <Toolbar />
           <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
             <Grid container spacing={3}>
-              {/* Chart */}
-              <Grid item xs={12} md={8} lg={9}>
-                <Paper
-                  sx={{
-                    p: 2,
-                    display: "flex",
-                    flexDirection: "column",
-                    height: 240,
-                  }}
-                >
-                  <Chart />
-                </Paper>
-              </Grid>
-              {/* Recent Deposits */}
-              <Grid item xs={12} md={4} lg={3}>
-                <Paper
-                  sx={{
-                    p: 2,
-                    display: "flex",
-                    flexDirection: "column",
-                    height: 240,
-                  }}
-                >
-                  <Deposits />
-                </Paper>
-              </Grid>
-              {/* Recent Orders */}
               <Grid item xs={12}>
-                <Paper sx={{ p: 2, display: "flex", flexDirection: "column" }}>
-                  <OrderTable />
-                </Paper>
+                <Card>
+                  <CardMedia
+                    component="img"
+                    className="h-96"
+                    image={`https://localhost:44369/api/getblogimage/udpwrgvyuku`}
+                    alt="Paella dish"
+                  />
+                  <CardContent className="space-y-5">
+                    <Typography variant="h3" color="text.secondary">
+                      Embracing the Tranquility of Nature
+                    </Typography>
+                    <Typography variant="h5" color="text.secondary">
+                      Md. Sazzad Siddique
+                    </Typography>
+                    <Typography variant="h5" color="text.secondary">
+                      2 December, 2023
+                    </Typography>
+                    <Typography variant="h6" color="text.secondary">
+                      Finding Solace in the Wilderness
+                    </Typography>
+                    <Typography variant="subtitle1" color="text.secondary">
+                      In the hustle and bustle of modern life, it's easy to
+                      forget the serene beauty that nature offers. From towering
+                      trees to babbling brooks, the natural world provides a
+                      respite from the chaos of our daily routines. This blog
+                      explores the therapeutic benefits of immersing oneself in
+                      nature, delving into the calming effects it has on our
+                      mental well-being. Join us on a journey of rediscovery as
+                      we learn to embrace the tranquility of nature and find
+                      solace in the wilderness.
+                    </Typography>
+                  </CardContent>
+                  <CardActions disableSpacing>
+                    <IconButton aria-label="add to favorites">
+                      <FavoriteIcon />
+                    </IconButton>
+                    <IconButton aria-label="share">
+                      <ShareIcon />
+                    </IconButton>
+                  </CardActions>
+                </Card>
               </Grid>
             </Grid>
             <Copyright sx={{ pt: 4 }} />

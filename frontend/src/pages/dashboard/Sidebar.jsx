@@ -81,7 +81,7 @@ const Sidebar = () => {
           </List>
         </Collapse>
       </Link>
-      <Link to="/">
+      <Link to="/yourorder">
         <Collapse in={open} timeout="auto" unmountOnExit>
           <List component="div" disablePadding>
             <ListItemButton sx={{ pl: 4 }}>
@@ -117,6 +117,18 @@ const Sidebar = () => {
           </List>
         </Collapse>
       </Link>
+      <Link to="/order">
+        <Collapse in={open} timeout="auto" unmountOnExit>
+          <List component="div" disablePadding>
+            <ListItemButton sx={{ pl: 4 }}>
+              <ListItemIcon>
+                <StoreRoundedIcon />
+              </ListItemIcon>
+              <ListItemText primary="Order List" />
+            </ListItemButton>
+          </List>
+        </Collapse>
+      </Link>
 
       {/* Blog */}
       <ListItemButton onClick={handleBlogClick}>
@@ -138,7 +150,7 @@ const Sidebar = () => {
           </List>
         </Collapse>
       </Link>
-      <Link to="/">
+      <Link to="/publishblog">
         <Collapse in={blogOpen} timeout="auto" unmountOnExit>
           <List component="div" disablePadding>
             <ListItemButton sx={{ pl: 4 }}>
@@ -150,7 +162,7 @@ const Sidebar = () => {
           </List>
         </Collapse>
       </Link>
-      <Link to="/">
+      <Link to="/blogList">
         <Collapse in={blogOpen} timeout="auto" unmountOnExit>
           <List component="div" disablePadding>
             <ListItemButton sx={{ pl: 4 }}>
@@ -182,7 +194,7 @@ const Sidebar = () => {
           </List>
         </Collapse>
       </Link>
-      <Link to="/">
+      <Link to="/createpost">
         <Collapse in={postOpen} timeout="auto" unmountOnExit>
           <List component="div" disablePadding>
             <ListItemButton sx={{ pl: 4 }}>
@@ -194,7 +206,7 @@ const Sidebar = () => {
           </List>
         </Collapse>
       </Link>
-      <Link to="/">
+      <Link to="/postlist">
         <Collapse in={postOpen} timeout="auto" unmountOnExit>
           <List component="div" disablePadding>
             <ListItemButton sx={{ pl: 4 }}>

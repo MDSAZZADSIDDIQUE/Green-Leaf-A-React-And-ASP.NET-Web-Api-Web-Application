@@ -12,6 +12,7 @@ import CardActionArea from "@mui/material/CardActionArea";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
+import Button from "@mui/material/Button";
 
 const sections = [
   { title: "Technology", url: "#" },
@@ -27,37 +28,45 @@ const sections = [
 ];
 
 const mainFeaturedPost = {
-  title: "Title of a longer featured blog post",
+  title: "Exploring the Enchanting Forests",
   description:
-    "Multiple lines of text that form the lede, informing new readers quickly and efficiently about what's most interesting in this post's contents.",
-  image: "https://source.unsplash.com/random?wallpapers",
-  imageText: "main image description",
-  linkText: "Continue reading…",
+    "Dive into the heart of nature's wonders as we explore the secrets hidden within the lush and enchanting forests. Discover the diverse flora and fauna that thrive in this captivating ecosystem.",
+  image:
+    "https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8bmF0dXJlfGVufDB8fDB8fHww",
+  imageText: "Majestic Forest",
+  linkText: "Continue reading...",
 };
 
 const featuredPosts = [
   {
-    title: "Featured post",
-    date: "Nov 12",
+    title: "Sunrise Serenity by the Lakeside",
+    date: "Jan 2",
     description:
-      "This is a wider card with supporting text below as a natural lead-in to additional content.",
-    image: "https://source.unsplash.com/random?wallpapers",
-    imageLabel: "Image Text",
+      "Witness the breathtaking beauty of a sunrise by the serene lakeside. Embrace the tranquility as the first light of dawn paints the sky in hues of orange and pink, casting a magical spell on the tranquil waters.",
+    image:
+      "https://images.unsplash.com/photo-1586348943529-beaae6c28db9?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTJ8fG5hdHVyZXxlbnwwfHwwfHx8MA%3D%3D",
+    imageLabel: "Lakeside Sunrise",
+    linkText: "Continue reading...",
   },
   {
-    title: "Post title",
-    date: "Nov 11",
+    title: "The Magnificence of Mountain Peaks",
+    date: "Jan 1",
     description:
-      "This is a wider card with supporting text below as a natural lead-in to additional content.",
-    image: "https://source.unsplash.com/random?wallpapers",
-    imageLabel: "Image Text",
+      "Embark on a journey to the towering mountain peaks and experience the awe-inspiring grandeur of nature. Explore the rugged terrain and marvel at the snow-capped summits that stand tall against the azure sky.",
+    image:
+      "https://images.unsplash.com/photo-1502082553048-f009c37129b9?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MzB8fG5hdHVyZXxlbnwwfHwwfHx8MA%3D%3D",
+    imageLabel: "Majestic Mountains",
+    linkText: "Continue reading...",
   },
 ];
 
 // TODO remove, this demo shouldn't need to reset the theme.
 const defaultTheme = createTheme();
+import { useNavigate } from "react-router-dom";
 
 export default function Blog() {
+  const navigate = useNavigate();
+
   const [blogArticle, setBlogArticle] = React.useState(null);
   const getProductList = async () => {
     try {
@@ -74,6 +83,10 @@ export default function Blog() {
   }, []);
 
   React.useEffect(() => {}, [blogArticle]);
+
+  const navigateTo = () => {
+    navigate("/blogpostpage");
+  };
 
   return (
     <ThemeProvider theme={defaultTheme}>
@@ -102,9 +115,9 @@ export default function Blog() {
                         <Typography variant="subtitle1" paragraph>
                           {post.sub_title}
                         </Typography>
-                        <Typography variant="subtitle1" color="primary">
+                        <Button color="primary" onClick={() => navigateTo()}>
                           Continue reading...
-                        </Typography>
+                        </Button>
                       </CardContent>
                       <CardMedia
                         component="img"
