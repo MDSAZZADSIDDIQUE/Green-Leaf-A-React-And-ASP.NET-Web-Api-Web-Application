@@ -1,0 +1,12 @@
+F:\New folder\konak\BLL\bin\Debug\BLL.dll
+F:\New folder\konak\BLL\bin\Debug\BLL.pdb
+F:\New folder\konak\BLL\bin\Debug\DAL.dll
+F:\New folder\konak\BLL\bin\Debug\EntityFramework.dll
+F:\New folder\konak\BLL\bin\Debug\DAL.pdb
+F:\New folder\konak\BLL\bin\Debug\DAL.dll.config
+F:\New folder\konak\BLL\bin\Debug\EntityFramework.xml
+F:\New folder\konak\BLL\obj\Debug\BLL.csproj.AssemblyReference.cache
+F:\New folder\konak\BLL\obj\Debug\BLL.csproj.CoreCompileInputs.cache
+F:\New folder\konak\BLL\obj\Debug\BLL.csproj.CopyComplete
+F:\New folder\konak\BLL\obj\Debug\BLL.dll
+F:\New folder\konak\BLL\obj\Debug\BLL.pdb
