@@ -36,5 +36,35 @@ namespace BLL.Services
             var user = mapper.Map<user>(userDto);
             UserRepo.RegisterUser(user);
         }
+
+        public static UserDto LoginUser(string root, MultipartFormDataStreamProvider provider)
+        {
+            var emailAddress = provider.FormData["emailAddress"];
+            var password = provider.FormData["password"];
+            var userData = UserRepo.LoginUser(emailAddress, password);
+            if (userData != null)
+            {
+                var mapperConfiguration =
+                    new MapperConfiguration(configure => { configure.CreateMap<user, UserDto>(); });
+                var mapper = new Mapper(mapperConfiguration);
+                var user = mapper.Map<UserDto>(userData);
+                return user;
+            }
+            return null;
+        }
+
+        public static UserDto GetUserProfile(string id)
+        {
+            var userData = UserRepo.GetUserProfile(id);
+            if (userData != null)
+            {
+                var mapperConfiguration =
+                    new MapperConfiguration(configure => { configure.CreateMap<user, UserDto>(); });
+                var mapper = new Mapper(mapperConfiguration);
+                var user = mapper.Map<UserDto>(userData);
+                return user;
+            }
+            return null;
+        }
     }
 }

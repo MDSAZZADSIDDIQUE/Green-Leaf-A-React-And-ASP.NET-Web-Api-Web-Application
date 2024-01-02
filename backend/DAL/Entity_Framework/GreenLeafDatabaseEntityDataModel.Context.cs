@@ -25,6 +25,13 @@ namespace DAL.Entity_Framework
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<blog> blogs { get; set; }
+        public virtual DbSet<cart_items> cart_items { get; set; }
+        public virtual DbSet<cart> carts { get; set; }
+        public virtual DbSet<order_items> order_items { get; set; }
+        public virtual DbSet<order> orders { get; set; }
+        public virtual DbSet<post> posts { get; set; }
+        public virtual DbSet<product> products { get; set; }
         public virtual DbSet<user> users { get; set; }
     }
 }

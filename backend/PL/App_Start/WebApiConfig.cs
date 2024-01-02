@@ -1,4 +1,5 @@
 ﻿using System.Web.Http;
+using System.Web.Http.Cors;
 
 namespace PL
 {
@@ -16,6 +17,8 @@ namespace PL
                 routeTemplate: "api/{controller}/{id}",
                 defaults: new { id = RouteParameter.Optional }
             );
+            var cors = new EnableCorsAttribute("http://localhost:5173", "*", "*");
+            config.EnableCors(cors);
         }
     }
 }
