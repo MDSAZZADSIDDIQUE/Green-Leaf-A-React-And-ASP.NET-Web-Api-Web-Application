@@ -1,7 +1,7 @@
-import React from "react";
-import { Link } from "react-router-dom";
 import Box from "@mui/material/Box";
-import Footer from "../components/Footer";
+import React from "react";
+import { Helmet } from "react-helmet-async";
+import { Link } from "react-router-dom";
 
 const HomePage = () => {
   return (
@@ -11,6 +11,9 @@ const HomePage = () => {
         backgroundImage: "url('riski-andriansyah-Gl6GljPtJpo-unsplash.jpg')",
       }}
     >
+      <Helmet>
+        <title>Green Leaf</title>
+      </Helmet>
       <Box className="flex justify-between p-5 text-white text-xl">
         <Box>
           <Link to="/">Green Leaf</Link>
@@ -25,7 +28,6 @@ const HomePage = () => {
           <h1>The hub for Nature Enthusiast</h1>
         </Box>
       </Box>
-      <Footer />
     </Box>
   );
 };

@@ -1,13 +1,13 @@
-import * as React from 'react';
-import Link from '@mui/material/Link';
-import Typography from '@mui/material/Typography';
-import Title from './Title';
+import Link from "@mui/material/Link";
+import Typography from "@mui/material/Typography";
+import * as React from "react";
+import Title from "./Title";
 
 function preventDefault(event) {
   event.preventDefault();
 }
 
-export default function Deposits() {
+const Deposits = () => {
   return (
     <React.Fragment>
       <Title>Recent Deposits</Title>
@@ -24,4 +24,6 @@ export default function Deposits() {
       </div>
     </React.Fragment>
   );
-}
+};
+
+export default Deposits;

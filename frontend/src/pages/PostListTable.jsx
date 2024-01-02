@@ -1,6 +1,6 @@
-import * as React from "react";
 import { DataGrid } from "@mui/x-data-grid";
 import axios from "axios";
+import * as React from "react";
 
 const columns = [
   { field: "id", headerName: "ID" },
@@ -8,7 +8,7 @@ const columns = [
   { field: "caption", headerName: "Caption" },
 ];
 
-export default function PostListTable() {
+const PostListTable = () => {
   const [rows, setRows] = React.useState(null);
 
   const getProductList = async () => {
@@ -43,4 +43,6 @@ export default function PostListTable() {
       </div>
     )
   );
-}
+};
+
+export default PostListTable;

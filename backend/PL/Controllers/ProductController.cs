@@ -40,16 +40,16 @@ namespace PL.Controllers
 
         [HttpGet]
         [Route("api/shop")]
-        public async Task<HttpResponseMessage> Shop()
+        public Task<HttpResponseMessage> Shop()
         {
             try
             {
                 var products = ProductService.Shop();
-                return Request.CreateResponse(HttpStatusCode.OK, products);
+                return Task.FromResult(Request.CreateResponse(HttpStatusCode.OK, products));
             }
             catch (Exception e)
             {
-                return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, e);
+                return Task.FromResult(Request.CreateErrorResponse(HttpStatusCode.InternalServerError, e));
             }
         }
 

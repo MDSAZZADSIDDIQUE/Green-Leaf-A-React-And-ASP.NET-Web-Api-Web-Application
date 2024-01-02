@@ -21,6 +21,7 @@ import Typography from "@mui/material/Typography";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import axios from "axios";
 import * as React from "react";
+import { Helmet } from "react-helmet-async";
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 import * as yup from "yup";
@@ -97,6 +98,9 @@ const LoginPage = () => {
   };
   return (
     <ThemeProvider theme={defaultTheme}>
+      <Helmet>
+        <title>Login</title>
+      </Helmet>
       <Box>
         <Box className="flex justify-between p-5  text-xl">
           <Box>
@@ -158,7 +162,6 @@ const LoginPage = () => {
                   label="Email Address"
                   name="emailAddress"
                   autoComplete="email"
-                  autoFocus
                   {...register("emailAddress")}
                   helperText={errors.emailAddress?.message}
                 />
@@ -254,7 +257,7 @@ const LoginPage = () => {
                   </Link>
                 </Grid>
                 <Grid item>
-                  <Link href="#" variant="body2">
+                  <Link to="/registration">
                     {"Don't have an account? Sign Up"}
                   </Link>
                 </Grid>

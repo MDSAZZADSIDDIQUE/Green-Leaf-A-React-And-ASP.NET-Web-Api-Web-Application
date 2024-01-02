@@ -9,23 +9,24 @@ import {
 import App from "./App.jsx";
 import "./index.css";
 import AddProductPage from "./pages/AddProductPage.jsx";
+import BlogListPage from "./pages/BlogListPage.jsx";
+import BlogPostPage from "./pages/BlogPostPage.jsx";
 import BlogsPage from "./pages/BlogsPage.jsx";
+import CartPage from "./pages/CartPage.jsx";
+import CreatePostPage from "./pages/CreatePostPage.jsx";
 import HomePage from "./pages/HomePage.jsx";
 import LoginPage from "./pages/LoginPage.jsx";
+import OrderListPage from "./pages/OrderListPage.jsx";
+import PostListPage from "./pages/PostListPage.jsx";
 import PostsPage from "./pages/PostsPage.jsx";
+import ProductListPage from "./pages/ProductListPage.jsx";
+import PublishBlogPage from "./pages/PublishBlogPage.jsx";
 import RegistrationPage from "./pages/RegistrationPage.jsx";
 import ShopPage from "./pages/ShopPage.jsx";
 import UserDashboardPage from "./pages/UserDashboardPage.jsx";
-import ProductListPage from "./pages/ProductListPage.jsx";
-import CartPage from "./pages/CartPage.jsx";
-import Checkout from "./pages/checkout/Checkout.jsx";
-import PublishBlogPage from "./pages/PublishBlogPage.jsx";
-import CreatePostPage from "./pages/CreatePostPage.jsx";
 import YourOrderListPage from "./pages/YourOrderListPage.jsx";
-import OrderListPage from "./pages/OrderListPage.jsx";
-import BlogListPage from "./pages/BlogListPage.jsx";
-import PostListPage from "./pages/PostListPage.jsx";
-import BlogPostPage from "./pages/BlogPostPage.jsx";
+import Checkout from "./pages/checkout/Checkout.jsx";
+
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<App />}>

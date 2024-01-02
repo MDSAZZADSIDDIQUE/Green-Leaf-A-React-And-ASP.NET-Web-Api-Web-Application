@@ -31,6 +31,7 @@ import Paper from "@mui/material/Paper";
 import Grid from "@mui/material/Grid";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { Helmet } from "react-helmet-async";
 
 const schema = yup.object({
   firstName: yup.string().required("First Name is required"),
@@ -131,6 +132,9 @@ const RegistrationPage = () => {
 
   return (
     <ThemeProvider theme={defaultTheme}>
+      <Helmet>
+        <title>Registration</title>
+      </Helmet>
       <Box>
         <Box className="flex justify-between p-5  text-xl">
           <Box>
@@ -194,7 +198,6 @@ const RegistrationPage = () => {
                       label="First Name"
                       name="firstName"
                       autoComplete="given-name"
-                      autoFocus
                       {...register("firstName")}
                       helperText={errors.firstName?.message}
                     />
@@ -450,9 +453,7 @@ const RegistrationPage = () => {
               </Button>
               <Grid container justifyContent="flex-end">
                 <Grid item>
-                  <Link href="#" variant="body2">
-                    Already have an account? Sign in
-                  </Link>
+                  <Link to="/login">Already have an account? Sign in</Link>
                 </Grid>
               </Grid>
               <Copyright sx={{ mt: 5 }} />
