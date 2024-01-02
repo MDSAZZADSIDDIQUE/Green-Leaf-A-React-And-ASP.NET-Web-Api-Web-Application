@@ -1,0 +1,17 @@
+C:\Users\ASUS\source\repos\Final_Viva\D_App\bin\Debug\D_App.exe.config
+C:\Users\ASUS\source\repos\Final_Viva\D_App\bin\Debug\D_App.exe
+C:\Users\ASUS\source\repos\Final_Viva\D_App\bin\Debug\D_App.pdb
+C:\Users\ASUS\source\repos\Final_Viva\D_App\bin\Debug\BLL.dll
+C:\Users\ASUS\source\repos\Final_Viva\D_App\bin\Debug\AutoMapper.dll
+C:\Users\ASUS\source\repos\Final_Viva\D_App\bin\Debug\DAL.dll
+C:\Users\ASUS\source\repos\Final_Viva\D_App\bin\Debug\EntityFramework.dll
+C:\Users\ASUS\source\repos\Final_Viva\D_App\bin\Debug\BLL.pdb
+C:\Users\ASUS\source\repos\Final_Viva\D_App\bin\Debug\AutoMapper.xml
+C:\Users\ASUS\source\repos\Final_Viva\D_App\bin\Debug\DAL.pdb
+C:\Users\ASUS\source\repos\Final_Viva\D_App\bin\Debug\DAL.dll.config
+C:\Users\ASUS\source\repos\Final_Viva\D_App\bin\Debug\EntityFramework.xml
+C:\Users\ASUS\source\repos\Final_Viva\D_App\obj\Debug\D_App.csproj.AssemblyReference.cache
+C:\Users\ASUS\source\repos\Final_Viva\D_App\obj\Debug\D_App.csproj.CoreCompileInputs.cache
+C:\Users\ASUS\source\repos\Final_Viva\D_App\obj\Debug\D_App.csproj.CopyComplete
+C:\Users\ASUS\source\repos\Final_Viva\D_App\obj\Debug\D_App.exe
+C:\Users\ASUS\source\repos\Final_Viva\D_App\obj\Debug\D_App.pdb
