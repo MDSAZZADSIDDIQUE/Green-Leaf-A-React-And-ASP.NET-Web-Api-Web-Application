@@ -1,29 +1,34 @@
+import Box from "@mui/material/Box";
 import axios from "axios";
 import * as React from "react";
 import DashboardLayout from "../components/DashboardLayout";
 import PostCard from "../components/PostCard";
 
 const PostsPage = () => {
-  const [blogArticle, setBlogArticle] = React.useState(null);
-  const getProductList = async () => {
+  const [posts, setPosts] = React.useState(null);
+  const getPosts = async () => {
     try {
-      const response = await axios.get("https://localhost:44369/api/getPost");
-      setBlogArticle(response.data);
+      await axios
+        .get("https://localhost:44369/api/getPost")
+        .then((response) => setPosts(response.data));
     } catch (error) {
       console.error(error);
     }
   };
-
   React.useEffect(() => {
-    getProductList();
-    console.log(blogArticle);
+    getPosts();
   }, []);
 
-  React.useEffect(() => {}, [blogArticle]);
+  React.useEffect(() => {}, [posts]);
 
   return (
     <DashboardLayout title="Posts">
-      {blogArticle && blogArticle.map((post) => <PostCard posts={post} />)}
+      {posts &&
+        posts.map((post) => (
+          <Box key={post.id} className="flex justify-center my-10">
+            <PostCard posts={post} />
+          </Box>
+        ))}
     </DashboardLayout>
   );
 };

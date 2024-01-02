@@ -14,9 +14,9 @@ import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import { ThemeProvider, createTheme, styled } from "@mui/material/styles";
 import * as React from "react";
+import { Helmet } from "react-helmet-async";
 import Sidebar from "../pages/dashboard/Sidebar";
 import AvatarMenu from "./AvatarMenu";
-import { Helmet } from "react-helmet-async";
 
 function Copyright(props) {
   return (
@@ -28,7 +28,7 @@ function Copyright(props) {
     >
       {"Copyright © "}
       <Link color="inherit" href="https://mui.com/">
-        Your Website
+        Green Leaf
       </Link>{" "}
       {new Date().getFullYear()}
       {"."}
@@ -157,10 +157,8 @@ const DashboardLayout = ({ title, children }) => {
           }}
         >
           <Toolbar />
-          <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
-            <Grid container spacing={3}>
-              {children}
-            </Grid>
+          <Container maxWidth="lg">
+            {children}
             <Copyright sx={{ pt: 4 }} />
           </Container>
         </Box>

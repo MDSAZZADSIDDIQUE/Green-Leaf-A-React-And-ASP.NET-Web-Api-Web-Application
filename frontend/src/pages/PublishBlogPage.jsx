@@ -151,7 +151,12 @@ const PublishBlogPage = () => {
             Upload file
             <VisuallyHiddenInput type="file" {...register("image")} />
           </Button>
-          <Button type="submit" variant="contained">
+          <Button
+            type="submit"
+            variant="contained"
+            size="large"
+            endIcon={<PublishIcon />}
+          >
             Publish
           </Button>
         </Box>

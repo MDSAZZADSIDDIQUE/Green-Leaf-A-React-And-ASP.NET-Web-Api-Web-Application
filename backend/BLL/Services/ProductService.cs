@@ -80,7 +80,6 @@ namespace BLL.Services
             {
                 cart = userCart;
             }
-
             var product = DataAccessFactory.ProductDataAccess().Get(int.Parse(productId));
             var cartItemDto = new CartItemDto()
             {

@@ -11,8 +11,13 @@ import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import * as yup from "yup";
 import DashboardLayout from "../components/DashboardLayout";
-
-const schema = yup.object({});
+import PublishIcon from "@mui/icons-material/Publish";
+import BorderColorRoundedIcon from "@mui/icons-material/BorderColorRounded";
+const schema = yup
+  .object({
+    caption: yup.string().required("Caption is required"),
+  })
+  .required();
 
 const VisuallyHiddenInput = styled("input")({
   clip: "rect(0 0 0 0)",
@@ -27,14 +32,6 @@ const VisuallyHiddenInput = styled("input")({
 });
 
 const CreatePostPage = () => {
-  // Select
-  const [status, setStatus] = React.useState("");
-
-  const handleChange = (event) => {
-    setStatus(event.target.value);
-  };
-
-  // React Hook Form
   const {
     register,
     handleSubmit,
@@ -43,9 +40,7 @@ const CreatePostPage = () => {
     resolver: yupResolver(schema),
   });
   const navigate = useNavigate();
-
   const onSubmit = async (data) => {
-    console.log(data);
     const formData = new FormData();
     formData.append("caption", data.caption);
     formData.append("image", data.image[0]);
@@ -55,6 +50,7 @@ const CreatePostPage = () => {
           "Content-Type": "multipart/form-data",
         },
       });
+      navigate("/postlist");
     } catch (error) {
       console.error(error);
     }
@@ -66,45 +62,49 @@ const CreatePostPage = () => {
         component="form"
         noValidate
         onSubmit={handleSubmit(onSubmit)}
-        className="flex flex-col justify-center items-center h-screen"
+        className=" h-screen flex mt-10"
       >
-        <Box className="flex flex-col w-96 space-y-5">
-          <Typography variant="h4" className="text-center">
-            Publish Blog
-          </Typography>
-          {errors.name?.message ? (
+        <Box className=" flex flex-col w-1/2 space-y-10">
+          <Typography variant="h4">Create Post</Typography>
+          <Button
+            component="label"
+            variant="contained"
+            startIcon={<CloudUploadIcon />}
+            size="large"
+          >
+            Upload file
+            <VisuallyHiddenInput type="file" {...register("image")} />
+          </Button>
+          {errors.caption?.message ? (
             <TextField
               error
               required
-              id="name"
+              id="caption"
               label="Caption"
-              name="name"
-              autoComplete="name"
+              name="caption"
+              autoComplete="caption"
               autoFocus
               {...register("caption")}
-              helperText={errors.name?.message}
+              helperText={errors.caption?.message}
             />
           ) : (
             <TextField
               required
-              id="name"
+              id="caption"
               label="Caption"
-              name="name"
-              autoComplete="name"
+              name="caption"
+              autoComplete="caption"
               autoFocus
               {...register("caption")}
             />
           )}
           <Button
-            component="label"
+            type="submit"
             variant="contained"
-            startIcon={<CloudUploadIcon />}
+            size="large"
+            endIcon={<BorderColorRoundedIcon />}
           >
-            Upload file
-            <VisuallyHiddenInput type="file" {...register("image")} />
-          </Button>
-          <Button type="submit" variant="contained">
-            Publish
+            Create Post
           </Button>
         </Box>
       </Box>
