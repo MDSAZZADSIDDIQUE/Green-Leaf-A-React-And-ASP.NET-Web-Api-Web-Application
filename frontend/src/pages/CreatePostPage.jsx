@@ -1,4 +1,5 @@
 import { yupResolver } from "@hookform/resolvers/yup";
+import BorderColorRoundedIcon from "@mui/icons-material/BorderColorRounded";
 import CloudUploadIcon from "@mui/icons-material/CloudUpload";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
@@ -11,8 +12,6 @@ import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import * as yup from "yup";
 import DashboardLayout from "../components/DashboardLayout";
-import PublishIcon from "@mui/icons-material/Publish";
-import BorderColorRoundedIcon from "@mui/icons-material/BorderColorRounded";
 const schema = yup
   .object({
     caption: yup.string().required("Caption is required"),

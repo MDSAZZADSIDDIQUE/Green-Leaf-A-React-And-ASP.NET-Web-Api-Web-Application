@@ -1,57 +1,69 @@
-import FavoriteIcon from "@mui/icons-material/Favorite";
-import ShareIcon from "@mui/icons-material/Share";
+import Box from "@mui/material/Box";
 import Card from "@mui/material/Card";
-import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
-import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
+import axios from "axios";
 import * as React from "react";
+import { useParams } from "react-router-dom";
 import DashboardLayout from "../components/DashboardLayout";
 
 const BlogPostPage = () => {
+  const { blogID } = useParams();
+  const [blog, setBlog] = React.useState(null);
+  const getBlog = async () => {
+    try {
+      await axios
+        .get(`https://localhost:44369/api/getblog/${blogID}`)
+        .then((response) => {
+          setBlog(response.data);
+        });
+      console.log(blog);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  React.useEffect(() => {
+    getBlog();
+  }, []);
+
+  React.useEffect(() => {}, [blog]);
+
   return (
     <DashboardLayout>
-      <Card>
-        <CardMedia
-          component="img"
-          className="h-96"
-          image={`https://localhost:44369/api/getblogimage/udpwrgvyuku`}
-          alt="Paella dish"
-        />
-        <CardContent className="space-y-5">
-          <Typography variant="h3" color="text.secondary">
-            Embracing the Tranquility of Nature
-          </Typography>
-          <Typography variant="h5" color="text.secondary">
-            Md. Sazzad Siddique
-          </Typography>
-          <Typography variant="h5" color="text.secondary">
-            2 December, 2023
-          </Typography>
-          <Typography variant="h6" color="text.secondary">
-            Finding Solace in the Wilderness
-          </Typography>
-          <Typography variant="subtitle1" color="text.secondary">
-            In the hustle and bustle of modern life, it's easy to forget the
-            serene beauty that nature offers. From towering trees to babbling
-            brooks, the natural world provides a respite from the chaos of our
-            daily routines. This blog explores the therapeutic benefits of
-            immersing oneself in nature, delving into the calming effects it has
-            on our mental well-being. Join us on a journey of rediscovery as we
-            learn to embrace the tranquility of nature and find solace in the
-            wilderness.
-          </Typography>
-        </CardContent>
-        <CardActions disableSpacing>
-          <IconButton aria-label="add to favorites">
-            <FavoriteIcon />
-          </IconButton>
-          <IconButton aria-label="share">
-            <ShareIcon />
-          </IconButton>
-        </CardActions>
-      </Card>
+      {blog && (
+        <Card className="mt-10">
+          <CardMedia
+            component="img"
+            className="h-96"
+            image={`https://localhost:44369/api/getblogimage/${blog.image}`}
+            alt="Paella dish"
+          />
+
+          <CardContent className="m-5 space-y-5">
+            <Box className="space-y-1">
+              <Typography variant="h4">{blog.title}</Typography>
+              <Typography variant="subtitle1" color="text.secondary">
+                Md. Sazzad Siddique
+              </Typography>
+              <Typography variant="subtitle1" color="text.secondary">
+                {new Date(blog.published_at).toLocaleDateString("en-US", {
+                  year: "numeric",
+                  month: "long",
+                  day: "numeric",
+                })}
+              </Typography>
+            </Box>
+            <Box className="space-y-3">
+              <Typography variant="h6" color="text.secondary">
+                {blog.sub_title}
+              </Typography>
+              <Typography variant="body1">{blog.content_body}</Typography>
+            </Box>
+          </CardContent>
+        </Card>
+      )}
     </DashboardLayout>
   );
 };

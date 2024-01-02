@@ -143,5 +143,20 @@ namespace PL.Controllers
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, e);
             }
         }
+
+        [HttpGet]
+        [Route("api/getproduct/{productId}")]
+        public HttpResponseMessage GetProduct([FromUri] string productId)
+        {
+            try
+            {
+                var product = ProductService.GetProduct(productId);
+                return Request.CreateResponse(HttpStatusCode.OK, product);
+            }
+            catch (Exception e)
+            {
+                return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, e);
+            }
+        }
     }
 }

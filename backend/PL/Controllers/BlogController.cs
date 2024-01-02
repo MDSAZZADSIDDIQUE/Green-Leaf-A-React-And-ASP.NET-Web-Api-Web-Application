@@ -84,5 +84,20 @@ namespace PL.Controllers
 
             return NotFound();
         }
+
+        [HttpGet]
+        [Route("api/getblog/{blogId}")]
+        public HttpResponseMessage GetBlog([FromUri] string blogId)
+        {
+            try
+            {
+                var blog = BlogService.GetBlog(blogId);
+                return Request.CreateResponse(HttpStatusCode.OK, blog);
+            }
+            catch (Exception e)
+            {
+                return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, e);
+            }
+        }
     }
 }

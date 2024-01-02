@@ -1,5 +1,6 @@
 import { yupResolver } from "@hookform/resolvers/yup";
 import CloudUploadIcon from "@mui/icons-material/CloudUpload";
+import PublishIcon from "@mui/icons-material/Publish";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
@@ -12,7 +13,11 @@ import { useNavigate } from "react-router-dom";
 import * as yup from "yup";
 import DashboardLayout from "../components/DashboardLayout";
 
-const schema = yup.object({});
+const schema = yup.object({
+  title: yup.string().required("Title is required"),
+  summary: yup.string().required("Summary is required"),
+  content: yup.string().required("content is required"),
+});
 
 const VisuallyHiddenInput = styled("input")({
   clip: "rect(0 0 0 0)",
@@ -27,14 +32,6 @@ const VisuallyHiddenInput = styled("input")({
 });
 
 const PublishBlogPage = () => {
-  // Select
-  const [status, setStatus] = React.useState("");
-
-  const handleChange = (event) => {
-    setStatus(event.target.value);
-  };
-
-  // React Hook Form
   const {
     register,
     handleSubmit,
@@ -48,8 +45,8 @@ const PublishBlogPage = () => {
     console.log(data);
     const formData = new FormData();
     formData.append("title", data.title);
-    formData.append("subTitle", data.subTitle);
-    formData.append("category", data.content);
+    formData.append("subTitle", data.summary);
+    formData.append("content", data.content);
     formData.append("image", data.image[0]);
     try {
       await axios.post("https://localhost:44369/api/publishblog", formData, {
@@ -57,6 +54,7 @@ const PublishBlogPage = () => {
           "Content-Type": "multipart/form-data",
         },
       });
+      navigate("/blogList");
     } catch (error) {
       console.error(error);
     }
@@ -68,77 +66,77 @@ const PublishBlogPage = () => {
         component="form"
         noValidate
         onSubmit={handleSubmit(onSubmit)}
-        className="flex flex-col justify-center items-center h-screen"
+        className=" h-screen flex mt-10"
       >
-        <Box className="flex flex-col w-96 space-y-5">
-          <Typography variant="h4" className="text-center">
+        <Box className=" flex flex-col w-1/2 space-y-10">
+          <Typography variant="h4" className="">
             Publish Blog
           </Typography>
           {errors.name?.message ? (
             <TextField
               error
               required
-              id="name"
+              id="title"
               label="Title"
-              name="name"
-              autoComplete="name"
+              name="title"
+              autoComplete="title"
               autoFocus
               {...register("title")}
-              helperText={errors.name?.message}
+              helperText={errors.title?.message}
             />
           ) : (
             <TextField
               required
-              id="name"
+              id="title"
               label="Title"
-              name="name"
-              autoComplete="name"
+              name="title"
+              autoComplete="title"
               autoFocus
               {...register("title")}
             />
           )}
-          {errors.price?.message ? (
+          {errors.subTitle?.message ? (
             <TextField
               error
               required
-              id="price"
-              label="Sub-title"
-              name="price"
-              autoComplete="price"
+              id="summary"
+              label="Summary"
+              name="summary"
+              autoComplete="summary"
               autoFocus
-              {...register("subTitle")}
-              helperText={errors.price?.message}
+              {...register("summary")}
+              helperText={errors.subTitle?.message}
             />
           ) : (
             <TextField
               required
-              id="price"
-              label="Sub-title"
-              name="price"
-              autoComplete="price"
+              id="summary"
+              label="Summary"
+              name="summary"
+              autoComplete="summary"
               autoFocus
-              {...register("subTitle")}
+              {...register("summary")}
             />
           )}
-          {errors.description?.message ? (
+          {errors.content?.message ? (
             <TextField
               error
               required
-              id="description"
+              id="content"
               label="Content"
-              name="description"
-              autoComplete="description"
+              name="content"
+              autoComplete="content"
               autoFocus
               {...register("content")}
-              helperText={errors.description?.message}
+              helperText={errors.content?.message}
             />
           ) : (
             <TextField
               required
-              id="description"
+              id="content"
               label="Content"
-              name="description"
-              autoComplete="description"
+              name="content"
+              autoComplete="content"
               autoFocus
               {...register("content")}
             />

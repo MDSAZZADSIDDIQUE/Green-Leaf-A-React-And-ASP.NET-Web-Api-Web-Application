@@ -37,7 +37,7 @@ const BlogListTable = () => {
 
   return (
     rows && (
-      <div style={{ height: 400, width: "100%" }}>
+      <div style={{ height: 400, width: "100%" }} className="mt-10">
         <DataGrid
           rows={rows}
           columns={columns}

@@ -18,7 +18,7 @@ namespace BLL.Services
                 title = provider.FormData["title"],
                 author_id = int.Parse(id),
                 sub_title = provider.FormData["subTitle"],
-                content_body = provider.FormData["category"],
+                content_body = provider.FormData["content"],
                 published_at = DateTime.Now,
             };
             foreach (var file in provider.FileData)
@@ -52,6 +52,16 @@ namespace BLL.Services
             }
 
             return blogDtos;
+        }
+
+        public static BlogDto GetBlog(string blogId)
+        {
+            var blog = DataAccessFactory.BlogDataAccess().Get(int.Parse(blogId));
+            var mapperConfiguration =
+                new MapperConfiguration(configure => { configure.CreateMap<blog, BlogDto>(); });
+            var mapper = new Mapper(mapperConfiguration);
+            var blogDto = mapper.Map<BlogDto>(blog);
+            return blogDto;
         }
     }
 }

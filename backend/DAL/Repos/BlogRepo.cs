@@ -15,7 +15,7 @@ namespace DAL.Repos
 
         public blog Get(int id)
         {
-            throw new NotImplementedException();
+            return GreenLeafDatabase.blogs.Find(id);
         }
 
         public bool Add(blog obj)

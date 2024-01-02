@@ -47,7 +47,7 @@ const router = createBrowserRouter(
       <Route path="/order" element={<OrderListPage />} />
       <Route path="/blogList" element={<BlogListPage />} />
       <Route path="/postlist" element={<PostListPage />} />
-      <Route path="/blogpostpage" element={<BlogPostPage />} />
+      <Route path="/blogpostpage/:blogID" element={<BlogPostPage />} />
     </Route>
   )
 );

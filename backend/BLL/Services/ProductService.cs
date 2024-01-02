@@ -137,5 +137,15 @@ namespace BLL.Services
 
             return orderDto;
         }
+
+        public static ProductDto GetProduct(string productId)
+        {
+            var product = DataAccessFactory.ProductDataAccess().Get(int.Parse(productId));
+            var mapperConfiguration =
+                new MapperConfiguration(configure => { configure.CreateMap<product, ProductDto>(); });
+            var mapper = new Mapper(mapperConfiguration);
+            var productDto = mapper.Map<ProductDto>(product);
+            return productDto;
+        }
     }
 }
