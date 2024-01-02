@@ -119,10 +119,16 @@
     <Compile Include="Entity_Framework\order_items.cs">
       <DependentUpon>GreenLeafDatabaseEntityDataModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Entity_Framework\payment_details.cs">
+      <DependentUpon>GreenLeafDatabaseEntityDataModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Entity_Framework\post.cs">
       <DependentUpon>GreenLeafDatabaseEntityDataModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Entity_Framework\product.cs">
+      <DependentUpon>GreenLeafDatabaseEntityDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity_Framework\shipping_addresses.cs">
       <DependentUpon>GreenLeafDatabaseEntityDataModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Entity_Framework\user.cs">

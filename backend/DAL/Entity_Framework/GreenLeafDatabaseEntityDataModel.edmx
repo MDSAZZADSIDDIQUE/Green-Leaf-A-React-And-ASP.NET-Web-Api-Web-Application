@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="GreenLeafDatabaseModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="GreenLeafDatabaseModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="blogs">
           <Key>
             <PropertyRef Name="id" />
@@ -16,6 +16,7 @@
           <Property Name="content_body" Type="varchar" MaxLength="2550" />
           <Property Name="published_at" Type="date" />
           <Property Name="image" Type="varchar" MaxLength="50" />
+          <Property Name="views" Type="float" />
         </EntityType>
         <EntityType Name="cart_items">
           <Key>
@@ -61,6 +62,17 @@
           <Property Name="amount" Type="float" />
           <Property Name="shipping_address" Type="varchar" MaxLength="50" />
         </EntityType>
+        <EntityType Name="payment_details">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="user_id" Type="int" />
+          <Property Name="name_on_card" Type="varchar" MaxLength="255" />
+          <Property Name="card_number" Type="int" />
+          <Property Name="expiry_date" Type="date" />
+          <Property Name="cvv" Type="int" />
+        </EntityType>
         <EntityType Name="posts">
           <Key>
             <PropertyRef Name="id" />
@@ -84,6 +96,21 @@
           <Property Name="status" Type="varchar" MaxLength="50" />
           <Property Name="date_added" Type="date" />
           <Property Name="seller" Type="int" />
+        </EntityType>
+        <EntityType Name="shipping_addresses">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="user_id" Type="int" />
+          <Property Name="first_name" Type="varchar" MaxLength="255" />
+          <Property Name="last_name" Type="varchar" MaxLength="255" />
+          <Property Name="address_line_1" Type="varchar" MaxLength="255" />
+          <Property Name="address_line_2" Type="varchar" MaxLength="255" />
+          <Property Name="city" Type="varchar" MaxLength="255" />
+          <Property Name="state_or_province_or_region" Type="varchar" MaxLength="255" />
+          <Property Name="zip_or_postal_code" Type="int" />
+          <Property Name="country" Type="varchar" MaxLength="255" />
         </EntityType>
         <EntityType Name="users">
           <Key>
@@ -193,6 +220,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_payment_details_users">
+          <End Role="users" Type="Self.users" Multiplicity="0..1" />
+          <End Role="payment_details" Type="Self.payment_details" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="users">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="payment_details">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_posts_users">
           <End Role="users" Type="Self.users" Multiplicity="0..1" />
           <End Role="posts" Type="Self.posts" Multiplicity="*" />
@@ -217,14 +256,28 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_shipping_addresses_users">
+          <End Role="users" Type="Self.users" Multiplicity="0..1" />
+          <End Role="shipping_addresses" Type="Self.shipping_addresses" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="users">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="shipping_addresses">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="GreenLeafDatabaseModelStoreContainer">
           <EntitySet Name="blogs" EntityType="Self.blogs" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="cart_items" EntityType="Self.cart_items" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="carts" EntityType="Self.carts" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="order_items" EntityType="Self.order_items" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="orders" EntityType="Self.orders" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="payment_details" EntityType="Self.payment_details" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="posts" EntityType="Self.posts" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="products" EntityType="Self.products" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="shipping_addresses" EntityType="Self.shipping_addresses" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="users" EntityType="Self.users" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_blogs_blogs" Association="Self.FK_blogs_blogs">
             <End Role="users" EntitySet="users" />
@@ -258,6 +311,10 @@
             <End Role="users" EntitySet="users" />
             <End Role="orders" EntitySet="orders" />
           </AssociationSet>
+          <AssociationSet Name="FK_payment_details_users" Association="Self.FK_payment_details_users">
+            <End Role="users" EntitySet="users" />
+            <End Role="payment_details" EntitySet="payment_details" />
+          </AssociationSet>
           <AssociationSet Name="FK_posts_users" Association="Self.FK_posts_users">
             <End Role="users" EntitySet="users" />
             <End Role="posts" EntitySet="posts" />
@@ -266,8 +323,13 @@
             <End Role="users" EntitySet="users" />
             <End Role="products" EntitySet="products" />
           </AssociationSet>
+          <AssociationSet Name="FK_shipping_addresses_users" Association="Self.FK_shipping_addresses_users">
+            <End Role="users" EntitySet="users" />
+            <End Role="shipping_addresses" EntitySet="shipping_addresses" />
+          </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="GreenLeafDatabaseModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -282,6 +344,7 @@
           <Property Name="content_body" Type="String" MaxLength="2550" FixedLength="false" Unicode="false" />
           <Property Name="published_at" Type="DateTime" Precision="0" />
           <Property Name="image" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="views" Type="Double" />
           <NavigationProperty Name="user" Relationship="Self.FK_blogs_blogs" FromRole="blogs" ToRole="users" />
         </EntityType>
         <EntityType Name="cart_items">
@@ -293,10 +356,10 @@
           <Property Name="product_id" Type="Int32" />
           <Property Name="quantity" Type="Int32" />
           <Property Name="price" Type="Double" />
-          <NavigationProperty Name="cart" Relationship="Self.FK_cart_items_carts" FromRole="cart_items" ToRole="carts" />
-          <NavigationProperty Name="product" Relationship="Self.FK_cart_items_products" FromRole="cart_items" ToRole="products" />
           <Property Name="product_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="image" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="cart" Relationship="Self.FK_cart_items_carts" FromRole="cart_items" ToRole="carts" />
+          <NavigationProperty Name="product" Relationship="Self.FK_cart_items_products" FromRole="cart_items" ToRole="products" />
         </EntityType>
         <EntityType Name="cart">
           <Key>
@@ -331,12 +394,24 @@
           <Property Name="user_id" Type="Int32" />
           <Property Name="date" Type="DateTime" Precision="0" />
           <Property Name="status" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="carts" Relationship="Self.FK_carts_orders" FromRole="orders" ToRole="carts" />
-          <NavigationProperty Name="order_items" Relationship="Self.FK_order_items_orders" FromRole="orders" ToRole="order_items" />
-          <NavigationProperty Name="user" Relationship="Self.FK_orders_users" FromRole="orders" ToRole="users" />
           <Property Name="user_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="amount" Type="Double" />
           <Property Name="shipping_address" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="carts" Relationship="Self.FK_carts_orders" FromRole="orders" ToRole="carts" />
+          <NavigationProperty Name="order_items" Relationship="Self.FK_order_items_orders" FromRole="orders" ToRole="order_items" />
+          <NavigationProperty Name="user" Relationship="Self.FK_orders_users" FromRole="orders" ToRole="users" />
+        </EntityType>
+        <EntityType Name="payment_details">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="user_id" Type="Int32" />
+          <Property Name="name_on_card" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="card_number" Type="Int32" />
+          <Property Name="expiry_date" Type="DateTime" Precision="0" />
+          <Property Name="cvv" Type="Int32" />
+          <NavigationProperty Name="user" Relationship="Self.FK_payment_details_users" FromRole="payment_details" ToRole="users" />
         </EntityType>
         <EntityType Name="post">
           <Key>
@@ -366,6 +441,22 @@
           <NavigationProperty Name="order_items" Relationship="Self.FK_order_items_products" FromRole="products" ToRole="order_items" />
           <NavigationProperty Name="user" Relationship="Self.FK_products_products" FromRole="products" ToRole="users" />
         </EntityType>
+        <EntityType Name="shipping_addresses">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="user_id" Type="Int32" />
+          <Property Name="first_name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="last_name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="address_line_1" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="address_line_2" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="city" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="state_or_province_or_region" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="zip_or_postal_code" Type="Int32" />
+          <Property Name="country" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="user" Relationship="Self.FK_shipping_addresses_users" FromRole="shipping_addresses" ToRole="users" />
+        </EntityType>
         <EntityType Name="user">
           <Key>
             <PropertyRef Name="id" />
@@ -380,8 +471,10 @@
           <NavigationProperty Name="blogs" Relationship="Self.FK_blogs_blogs" FromRole="users" ToRole="blogs" />
           <NavigationProperty Name="carts" Relationship="Self.FK_carts_users" FromRole="users" ToRole="carts" />
           <NavigationProperty Name="orders" Relationship="Self.FK_orders_users" FromRole="users" ToRole="orders" />
+          <NavigationProperty Name="payment_details" Relationship="Self.FK_payment_details_users" FromRole="users" ToRole="payment_details" />
           <NavigationProperty Name="posts" Relationship="Self.FK_posts_users" FromRole="users" ToRole="posts" />
           <NavigationProperty Name="products" Relationship="Self.FK_products_products" FromRole="users" ToRole="products" />
+          <NavigationProperty Name="shipping_addresses" Relationship="Self.FK_shipping_addresses_users" FromRole="users" ToRole="shipping_addresses" />
         </EntityType>
         <Association Name="FK_blogs_blogs">
           <End Role="users" Type="Self.user" Multiplicity="0..1" />
@@ -479,6 +572,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_payment_details_users">
+          <End Role="users" Type="Self.user" Multiplicity="0..1" />
+          <End Role="payment_details" Type="Self.payment_details" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="users">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="payment_details">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_posts_users">
           <End Role="users" Type="Self.user" Multiplicity="0..1" />
           <End Role="posts" Type="Self.post" Multiplicity="*" />
@@ -503,14 +608,28 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_shipping_addresses_users">
+          <End Role="users" Type="Self.user" Multiplicity="0..1" />
+          <End Role="shipping_addresses" Type="Self.shipping_addresses" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="users">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="shipping_addresses">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="GreenLeafDatabaseEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="blogs" EntityType="Self.blog" />
           <EntitySet Name="cart_items" EntityType="Self.cart_items" />
           <EntitySet Name="carts" EntityType="Self.cart" />
           <EntitySet Name="order_items" EntityType="Self.order_items" />
           <EntitySet Name="orders" EntityType="Self.order" />
+          <EntitySet Name="payment_details" EntityType="Self.payment_details" />
           <EntitySet Name="posts" EntityType="Self.post" />
           <EntitySet Name="products" EntityType="Self.product" />
+          <EntitySet Name="shipping_addresses" EntityType="Self.shipping_addresses" />
           <EntitySet Name="users" EntityType="Self.user" />
           <AssociationSet Name="FK_blogs_blogs" Association="Self.FK_blogs_blogs">
             <End Role="users" EntitySet="users" />
@@ -544,6 +663,10 @@
             <End Role="users" EntitySet="users" />
             <End Role="orders" EntitySet="orders" />
           </AssociationSet>
+          <AssociationSet Name="FK_payment_details_users" Association="Self.FK_payment_details_users">
+            <End Role="users" EntitySet="users" />
+            <End Role="payment_details" EntitySet="payment_details" />
+          </AssociationSet>
           <AssociationSet Name="FK_posts_users" Association="Self.FK_posts_users">
             <End Role="users" EntitySet="users" />
             <End Role="posts" EntitySet="posts" />
@@ -551,6 +674,10 @@
           <AssociationSet Name="FK_products_products" Association="Self.FK_products_products">
             <End Role="users" EntitySet="users" />
             <End Role="products" EntitySet="products" />
+          </AssociationSet>
+          <AssociationSet Name="FK_shipping_addresses_users" Association="Self.FK_shipping_addresses_users">
+            <End Role="users" EntitySet="users" />
+            <End Role="shipping_addresses" EntitySet="shipping_addresses" />
           </AssociationSet>
         </EntityContainer>
       </Schema>
@@ -569,19 +696,20 @@
                 <ScalarProperty Name="content_body" ColumnName="content_body" />
                 <ScalarProperty Name="published_at" ColumnName="published_at" />
                 <ScalarProperty Name="image" ColumnName="image" />
+                <ScalarProperty Name="views" ColumnName="views" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="cart_items">
             <EntityTypeMapping TypeName="GreenLeafDatabaseModel.cart_items">
               <MappingFragment StoreEntitySet="cart_items">
-                <ScalarProperty Name="image" ColumnName="image" />
-                <ScalarProperty Name="product_name" ColumnName="product_name" />
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="cart_id" ColumnName="cart_id" />
                 <ScalarProperty Name="product_id" ColumnName="product_id" />
                 <ScalarProperty Name="quantity" ColumnName="quantity" />
                 <ScalarProperty Name="price" ColumnName="price" />
+                <ScalarProperty Name="product_name" ColumnName="product_name" />
+                <ScalarProperty Name="image" ColumnName="image" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -609,14 +737,26 @@
           <EntitySetMapping Name="orders">
             <EntityTypeMapping TypeName="GreenLeafDatabaseModel.order">
               <MappingFragment StoreEntitySet="orders">
-                <ScalarProperty Name="shipping_address" ColumnName="shipping_address" />
-                <ScalarProperty Name="amount" ColumnName="amount" />
-                <ScalarProperty Name="user_name" ColumnName="user_name" />
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="cart_id" ColumnName="cart_id" />
                 <ScalarProperty Name="user_id" ColumnName="user_id" />
                 <ScalarProperty Name="date" ColumnName="date" />
                 <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="user_name" ColumnName="user_name" />
+                <ScalarProperty Name="amount" ColumnName="amount" />
+                <ScalarProperty Name="shipping_address" ColumnName="shipping_address" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="payment_details">
+            <EntityTypeMapping TypeName="GreenLeafDatabaseModel.payment_details">
+              <MappingFragment StoreEntitySet="payment_details">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="user_id" ColumnName="user_id" />
+                <ScalarProperty Name="name_on_card" ColumnName="name_on_card" />
+                <ScalarProperty Name="card_number" ColumnName="card_number" />
+                <ScalarProperty Name="expiry_date" ColumnName="expiry_date" />
+                <ScalarProperty Name="cvv" ColumnName="cvv" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -643,6 +783,22 @@
                 <ScalarProperty Name="status" ColumnName="status" />
                 <ScalarProperty Name="date_added" ColumnName="date_added" />
                 <ScalarProperty Name="seller" ColumnName="seller" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="shipping_addresses">
+            <EntityTypeMapping TypeName="GreenLeafDatabaseModel.shipping_addresses">
+              <MappingFragment StoreEntitySet="shipping_addresses">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="user_id" ColumnName="user_id" />
+                <ScalarProperty Name="first_name" ColumnName="first_name" />
+                <ScalarProperty Name="last_name" ColumnName="last_name" />
+                <ScalarProperty Name="address_line_1" ColumnName="address_line_1" />
+                <ScalarProperty Name="address_line_2" ColumnName="address_line_2" />
+                <ScalarProperty Name="city" ColumnName="city" />
+                <ScalarProperty Name="state_or_province_or_region" ColumnName="state_or_province_or_region" />
+                <ScalarProperty Name="zip_or_postal_code" ColumnName="zip_or_postal_code" />
+                <ScalarProperty Name="country" ColumnName="country" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

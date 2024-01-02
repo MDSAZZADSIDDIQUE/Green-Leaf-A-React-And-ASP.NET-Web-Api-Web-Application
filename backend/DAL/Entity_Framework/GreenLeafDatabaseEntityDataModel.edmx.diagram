@@ -4,15 +4,17 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="a27e3d6205424c6d96edf1abc93540c1" Name="Diagram1">
-        <EntityTypeShape EntityType="GreenLeafDatabaseModel.blog" Width="1.5" PointX="3" PointY="3.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="GreenLeafDatabaseModel.cart_items" Width="1.5" PointX="7.5" PointY="12.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="GreenLeafDatabaseModel.cart" Width="1.5" PointX="5.25" PointY="8.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="GreenLeafDatabaseModel.order_items" Width="1.5" PointX="5.25" PointY="13.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="GreenLeafDatabaseModel.order" Width="1.5" PointX="3" PointY="9.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="GreenLeafDatabaseModel.post" Width="1.5" PointX="3" PointY="12.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="GreenLeafDatabaseModel.product" Width="1.5" PointX="3" PointY="15.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="GreenLeafDatabaseModel.user" Width="1.5" PointX="0.75" PointY="8" IsExpanded="true" />
+      <Diagram DiagramId="bf88fb1cbeaa491a8f83f7563781e672" Name="Diagram1">
+        <EntityTypeShape EntityType="GreenLeafDatabaseModel.blog" Width="1.5" PointX="3" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="GreenLeafDatabaseModel.cart_items" Width="1.5" PointX="7.5" PointY="16.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="GreenLeafDatabaseModel.cart" Width="1.5" PointX="5.25" PointY="12" IsExpanded="true" />
+        <EntityTypeShape EntityType="GreenLeafDatabaseModel.order_items" Width="1.5" PointX="5.25" PointY="15.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="GreenLeafDatabaseModel.order" Width="1.5" PointX="3" PointY="10.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="GreenLeafDatabaseModel.payment_details" Width="1.5" PointX="3" PointY="14.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="GreenLeafDatabaseModel.post" Width="1.5" PointX="3" PointY="17.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="GreenLeafDatabaseModel.product" Width="1.5" PointX="3" PointY="20.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="GreenLeafDatabaseModel.shipping_addresses" Width="1.5" PointX="3" PointY="24.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="GreenLeafDatabaseModel.user" Width="1.5" PointX="0.75" PointY="12.25" IsExpanded="true" />
         <AssociationConnector Association="GreenLeafDatabaseModel.FK_blogs_blogs" ManuallyRouted="false" />
         <AssociationConnector Association="GreenLeafDatabaseModel.FK_cart_items_carts" ManuallyRouted="false" />
         <AssociationConnector Association="GreenLeafDatabaseModel.FK_cart_items_products" ManuallyRouted="false" />
@@ -21,8 +23,10 @@
         <AssociationConnector Association="GreenLeafDatabaseModel.FK_order_items_orders" ManuallyRouted="false" />
         <AssociationConnector Association="GreenLeafDatabaseModel.FK_order_items_products" ManuallyRouted="false" />
         <AssociationConnector Association="GreenLeafDatabaseModel.FK_orders_users" ManuallyRouted="false" />
+        <AssociationConnector Association="GreenLeafDatabaseModel.FK_payment_details_users" ManuallyRouted="false" />
         <AssociationConnector Association="GreenLeafDatabaseModel.FK_posts_users" ManuallyRouted="false" />
         <AssociationConnector Association="GreenLeafDatabaseModel.FK_products_products" ManuallyRouted="false" />
+        <AssociationConnector Association="GreenLeafDatabaseModel.FK_shipping_addresses_users" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

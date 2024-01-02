@@ -1,7 +1,9 @@
+import RemoveRedEyeRoundedIcon from "@mui/icons-material/RemoveRedEyeRounded";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Grid from "@mui/material/Grid";
+import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import PropTypes from "prop-types";
 import * as React from "react";
@@ -27,10 +29,12 @@ function FeaturedPost(props) {
             <Typography variant="subtitle1" paragraph>
               {post.sub_title}
             </Typography>
-            <Typography variant="subtitle1" color="primary">
-              Continue reading...
-            </Typography>
+            <IconButton aria-label="views" className="space-x-2">
+              <RemoveRedEyeRoundedIcon />
+              <Typography>{post.views}</Typography>
+            </IconButton>
           </CardContent>
+
           <CardMedia
             component="img"
             sx={{ width: 160, display: { xs: "none", sm: "block" } }}

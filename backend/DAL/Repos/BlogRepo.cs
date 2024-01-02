@@ -15,7 +15,10 @@ namespace DAL.Repos
 
         public blog Get(int id)
         {
-            return GreenLeafDatabase.blogs.Find(id);
+            var blog = GreenLeafDatabase.blogs.Find(id);
+            blog.views += 0.5;
+            GreenLeafDatabase.SaveChanges();
+            return blog;
         }
 
         public bool Add(blog obj)

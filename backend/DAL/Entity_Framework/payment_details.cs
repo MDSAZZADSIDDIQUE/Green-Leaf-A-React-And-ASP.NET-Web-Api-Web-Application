@@ -12,16 +12,14 @@ namespace DAL.Entity_Framework
     using System;
     using System.Collections.Generic;
     
-    public partial class blog
+    public partial class payment_details
     {
         public int id { get; set; }
-        public string title { get; set; }
-        public Nullable<int> author_id { get; set; }
-        public string sub_title { get; set; }
-        public string content_body { get; set; }
-        public Nullable<System.DateTime> published_at { get; set; }
-        public string image { get; set; }
-        public Nullable<double> views { get; set; }
+        public Nullable<int> user_id { get; set; }
+        public string name_on_card { get; set; }
+        public Nullable<int> card_number { get; set; }
+        public Nullable<System.DateTime> expiry_date { get; set; }
+        public Nullable<int> cvv { get; set; }
     
         public virtual user user { get; set; }
     }

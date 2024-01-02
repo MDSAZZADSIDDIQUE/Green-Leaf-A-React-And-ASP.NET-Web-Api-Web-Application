@@ -11,6 +11,7 @@
     <Property Name="content_body" Type="varchar" MaxLength="2550" />
     <Property Name="published_at" Type="date" />
     <Property Name="image" Type="varchar" MaxLength="50" />
+    <Property Name="views" Type="float" />
   </EntityType>
   <EntityType Name="cart_items">
     <Key>
@@ -56,6 +57,17 @@
     <Property Name="amount" Type="float" />
     <Property Name="shipping_address" Type="varchar" MaxLength="50" />
   </EntityType>
+  <EntityType Name="payment_details">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="user_id" Type="int" />
+    <Property Name="name_on_card" Type="varchar" MaxLength="255" />
+    <Property Name="card_number" Type="int" />
+    <Property Name="expiry_date" Type="date" />
+    <Property Name="cvv" Type="int" />
+  </EntityType>
   <EntityType Name="posts">
     <Key>
       <PropertyRef Name="id" />
@@ -79,6 +91,21 @@
     <Property Name="status" Type="varchar" MaxLength="50" />
     <Property Name="date_added" Type="date" />
     <Property Name="seller" Type="int" />
+  </EntityType>
+  <EntityType Name="shipping_addresses">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="user_id" Type="int" />
+    <Property Name="first_name" Type="varchar" MaxLength="255" />
+    <Property Name="last_name" Type="varchar" MaxLength="255" />
+    <Property Name="address_line_1" Type="varchar" MaxLength="255" />
+    <Property Name="address_line_2" Type="varchar" MaxLength="255" />
+    <Property Name="city" Type="varchar" MaxLength="255" />
+    <Property Name="state_or_province_or_region" Type="varchar" MaxLength="255" />
+    <Property Name="zip_or_postal_code" Type="int" />
+    <Property Name="country" Type="varchar" MaxLength="255" />
   </EntityType>
   <EntityType Name="users">
     <Key>
@@ -188,6 +215,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_payment_details_users">
+    <End Role="users" Type="Self.users" Multiplicity="0..1" />
+    <End Role="payment_details" Type="Self.payment_details" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="users">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="payment_details">
+        <PropertyRef Name="user_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_posts_users">
     <End Role="users" Type="Self.users" Multiplicity="0..1" />
     <End Role="posts" Type="Self.posts" Multiplicity="*" />
@@ -212,14 +251,28 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_shipping_addresses_users">
+    <End Role="users" Type="Self.users" Multiplicity="0..1" />
+    <End Role="shipping_addresses" Type="Self.shipping_addresses" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="users">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="shipping_addresses">
+        <PropertyRef Name="user_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <EntityContainer Name="GreenLeafDatabaseModelStoreContainer">
     <EntitySet Name="blogs" EntityType="Self.blogs" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="cart_items" EntityType="Self.cart_items" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="carts" EntityType="Self.carts" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="order_items" EntityType="Self.order_items" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="orders" EntityType="Self.orders" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="payment_details" EntityType="Self.payment_details" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="posts" EntityType="Self.posts" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="products" EntityType="Self.products" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="shipping_addresses" EntityType="Self.shipping_addresses" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="users" EntityType="Self.users" Schema="dbo" store:Type="Tables" />
     <AssociationSet Name="FK_blogs_blogs" Association="Self.FK_blogs_blogs">
       <End Role="users" EntitySet="users" />
@@ -253,6 +306,10 @@
       <End Role="users" EntitySet="users" />
       <End Role="orders" EntitySet="orders" />
     </AssociationSet>
+    <AssociationSet Name="FK_payment_details_users" Association="Self.FK_payment_details_users">
+      <End Role="users" EntitySet="users" />
+      <End Role="payment_details" EntitySet="payment_details" />
+    </AssociationSet>
     <AssociationSet Name="FK_posts_users" Association="Self.FK_posts_users">
       <End Role="users" EntitySet="users" />
       <End Role="posts" EntitySet="posts" />
@@ -260,6 +317,10 @@
     <AssociationSet Name="FK_products_products" Association="Self.FK_products_products">
       <End Role="users" EntitySet="users" />
       <End Role="products" EntitySet="products" />
+    </AssociationSet>
+    <AssociationSet Name="FK_shipping_addresses_users" Association="Self.FK_shipping_addresses_users">
+      <End Role="users" EntitySet="users" />
+      <End Role="shipping_addresses" EntitySet="shipping_addresses" />
     </AssociationSet>
   </EntityContainer>
 </Schema>

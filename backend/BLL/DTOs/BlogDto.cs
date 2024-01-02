@@ -15,5 +15,6 @@ namespace BLL.DTOs
         public string content_body { get; set; }
         public Nullable<System.DateTime> published_at { get; set; }
         public string image { get; set; }
+        public double views { get; set; }
     }
 }

@@ -20,6 +20,7 @@ namespace BLL.Services
                 sub_title = provider.FormData["subTitle"],
                 content_body = provider.FormData["content"],
                 published_at = DateTime.Now,
+                views = 0
             };
             foreach (var file in provider.FileData)
             {

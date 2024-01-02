@@ -11,19 +11,20 @@
           <ScalarProperty Name="content_body" ColumnName="content_body" />
           <ScalarProperty Name="published_at" ColumnName="published_at" />
           <ScalarProperty Name="image" ColumnName="image" />
+          <ScalarProperty Name="views" ColumnName="views" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="cart_items">
       <EntityTypeMapping TypeName="GreenLeafDatabaseModel.cart_items">
         <MappingFragment StoreEntitySet="cart_items">
-          <ScalarProperty Name="image" ColumnName="image" />
-          <ScalarProperty Name="product_name" ColumnName="product_name" />
           <ScalarProperty Name="id" ColumnName="id" />
           <ScalarProperty Name="cart_id" ColumnName="cart_id" />
           <ScalarProperty Name="product_id" ColumnName="product_id" />
           <ScalarProperty Name="quantity" ColumnName="quantity" />
           <ScalarProperty Name="price" ColumnName="price" />
+          <ScalarProperty Name="product_name" ColumnName="product_name" />
+          <ScalarProperty Name="image" ColumnName="image" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -51,14 +52,26 @@
     <EntitySetMapping Name="orders">
       <EntityTypeMapping TypeName="GreenLeafDatabaseModel.order">
         <MappingFragment StoreEntitySet="orders">
-          <ScalarProperty Name="shipping_address" ColumnName="shipping_address" />
-          <ScalarProperty Name="amount" ColumnName="amount" />
-          <ScalarProperty Name="user_name" ColumnName="user_name" />
           <ScalarProperty Name="id" ColumnName="id" />
           <ScalarProperty Name="cart_id" ColumnName="cart_id" />
           <ScalarProperty Name="user_id" ColumnName="user_id" />
           <ScalarProperty Name="date" ColumnName="date" />
           <ScalarProperty Name="status" ColumnName="status" />
+          <ScalarProperty Name="user_name" ColumnName="user_name" />
+          <ScalarProperty Name="amount" ColumnName="amount" />
+          <ScalarProperty Name="shipping_address" ColumnName="shipping_address" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="payment_details">
+      <EntityTypeMapping TypeName="GreenLeafDatabaseModel.payment_details">
+        <MappingFragment StoreEntitySet="payment_details">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="user_id" ColumnName="user_id" />
+          <ScalarProperty Name="name_on_card" ColumnName="name_on_card" />
+          <ScalarProperty Name="card_number" ColumnName="card_number" />
+          <ScalarProperty Name="expiry_date" ColumnName="expiry_date" />
+          <ScalarProperty Name="cvv" ColumnName="cvv" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -85,6 +98,22 @@
           <ScalarProperty Name="status" ColumnName="status" />
           <ScalarProperty Name="date_added" ColumnName="date_added" />
           <ScalarProperty Name="seller" ColumnName="seller" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="shipping_addresses">
+      <EntityTypeMapping TypeName="GreenLeafDatabaseModel.shipping_addresses">
+        <MappingFragment StoreEntitySet="shipping_addresses">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="user_id" ColumnName="user_id" />
+          <ScalarProperty Name="first_name" ColumnName="first_name" />
+          <ScalarProperty Name="last_name" ColumnName="last_name" />
+          <ScalarProperty Name="address_line_1" ColumnName="address_line_1" />
+          <ScalarProperty Name="address_line_2" ColumnName="address_line_2" />
+          <ScalarProperty Name="city" ColumnName="city" />
+          <ScalarProperty Name="state_or_province_or_region" ColumnName="state_or_province_or_region" />
+          <ScalarProperty Name="zip_or_postal_code" ColumnName="zip_or_postal_code" />
+          <ScalarProperty Name="country" ColumnName="country" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

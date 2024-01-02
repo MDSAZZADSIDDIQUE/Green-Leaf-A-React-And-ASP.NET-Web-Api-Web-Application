@@ -12,16 +12,18 @@ namespace DAL.Entity_Framework
     using System;
     using System.Collections.Generic;
     
-    public partial class blog
+    public partial class shipping_addresses
     {
         public int id { get; set; }
-        public string title { get; set; }
-        public Nullable<int> author_id { get; set; }
-        public string sub_title { get; set; }
-        public string content_body { get; set; }
-        public Nullable<System.DateTime> published_at { get; set; }
-        public string image { get; set; }
-        public Nullable<double> views { get; set; }
+        public Nullable<int> user_id { get; set; }
+        public string first_name { get; set; }
+        public string last_name { get; set; }
+        public string address_line_1 { get; set; }
+        public string address_line_2 { get; set; }
+        public string city { get; set; }
+        public string state_or_province_or_region { get; set; }
+        public Nullable<int> zip_or_postal_code { get; set; }
+        public string country { get; set; }
     
         public virtual user user { get; set; }
     }

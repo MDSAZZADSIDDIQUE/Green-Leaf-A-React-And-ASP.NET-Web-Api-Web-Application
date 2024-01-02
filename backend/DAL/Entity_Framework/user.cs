@@ -20,8 +20,10 @@ namespace DAL.Entity_Framework
             this.blogs = new HashSet<blog>();
             this.carts = new HashSet<cart>();
             this.orders = new HashSet<order>();
+            this.payment_details = new HashSet<payment_details>();
             this.posts = new HashSet<post>();
             this.products = new HashSet<product>();
+            this.shipping_addresses = new HashSet<shipping_addresses>();
         }
     
         public int id { get; set; }
@@ -39,8 +41,12 @@ namespace DAL.Entity_Framework
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<order> orders { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<payment_details> payment_details { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<post> posts { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<product> products { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<shipping_addresses> shipping_addresses { get; set; }
     }
 }

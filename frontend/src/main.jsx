@@ -26,6 +26,7 @@ import ShopPage from "./pages/ShopPage.jsx";
 import UserDashboardPage from "./pages/UserDashboardPage.jsx";
 import YourOrderListPage from "./pages/YourOrderListPage.jsx";
 import Checkout from "./pages/checkout/Checkout.jsx";
+import ProductPage from "./pages/ProductPage.jsx";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -48,6 +49,7 @@ const router = createBrowserRouter(
       <Route path="/blogList" element={<BlogListPage />} />
       <Route path="/postlist" element={<PostListPage />} />
       <Route path="/blogpostpage/:blogID" element={<BlogPostPage />} />
+      <Route path="/productpage/:productID" element={<ProductPage />} />
     </Route>
   )
 );

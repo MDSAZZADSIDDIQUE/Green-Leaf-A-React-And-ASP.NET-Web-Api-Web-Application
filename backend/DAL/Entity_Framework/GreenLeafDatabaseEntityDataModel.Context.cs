@@ -30,8 +30,10 @@ namespace DAL.Entity_Framework
         public virtual DbSet<cart> carts { get; set; }
         public virtual DbSet<order_items> order_items { get; set; }
         public virtual DbSet<order> orders { get; set; }
+        public virtual DbSet<payment_details> payment_details { get; set; }
         public virtual DbSet<post> posts { get; set; }
         public virtual DbSet<product> products { get; set; }
+        public virtual DbSet<shipping_addresses> shipping_addresses { get; set; }
         public virtual DbSet<user> users { get; set; }
     }
 }

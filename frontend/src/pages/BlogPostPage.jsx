@@ -28,8 +28,6 @@ const BlogPostPage = () => {
     getBlog();
   }, []);
 
-  React.useEffect(() => {}, [blog]);
-
   return (
     <DashboardLayout>
       {blog && (
