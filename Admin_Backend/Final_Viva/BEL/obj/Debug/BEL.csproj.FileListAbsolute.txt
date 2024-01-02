@@ -1,0 +1,6 @@
+C:\Users\ASUS\source\repos\Final_Viva\BEL\bin\Debug\BEL.dll
+C:\Users\ASUS\source\repos\Final_Viva\BEL\bin\Debug\BEL.pdb
+C:\Users\ASUS\source\repos\Final_Viva\BEL\obj\Debug\BEL.csproj.AssemblyReference.cache
+C:\Users\ASUS\source\repos\Final_Viva\BEL\obj\Debug\BEL.csproj.CoreCompileInputs.cache
+C:\Users\ASUS\source\repos\Final_Viva\BEL\obj\Debug\BEL.dll
+C:\Users\ASUS\source\repos\Final_Viva\BEL\obj\Debug\BEL.pdb

@@ -1,0 +1,73 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="AdminTable">
+    <Key>
+      <PropertyRef Name="Admin_ID" />
+    </Key>
+    <Property Name="Admin_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Admin_Name" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+    <Property Name="Admin_Password" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+    <Property Name="Admin_Email" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+    <Property Name="Admin_Phone" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Category_Tables">
+    <Key>
+      <PropertyRef Name="Category_ID" />
+    </Key>
+    <Property Name="Category_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Category_Name" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="ProductTables" Relationship="Self.FK_ProductTables_Category_Tables" FromRole="Category_Tables" ToRole="ProductTables" />
+  </EntityType>
+  <EntityType Name="ProductTable">
+    <Key>
+      <PropertyRef Name="PlantProductID" />
+    </Key>
+    <Property Name="PlantProductID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ProductName" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+    <Property Name="Description" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+    <Property Name="CategoryID" Type="Int32" Nullable="false" />
+    <Property Name="Price" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Category_Tables" Relationship="Self.FK_ProductTables_Category_Tables" FromRole="ProductTables" ToRole="Category_Tables" />
+  </EntityType>
+  <EntityType Name="Promotion_Table">
+    <Key>
+      <PropertyRef Name="PromotionID" />
+    </Key>
+    <Property Name="PromotionID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CampaignName" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+    <Property Name="Description" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+    <Property Name="StartDate" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+    <Property Name="EndDate" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+  </EntityType>
+  <EntityType Name="BlogTable">
+    <Key>
+      <PropertyRef Name="Admin_Blog_ID" />
+      <PropertyRef Name="Admin_Post" />
+    </Key>
+    <Property Name="Admin_Blog_ID" Type="Int32" Nullable="false" />
+    <Property Name="Admin_Post" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_ProductTables_Category_Tables">
+    <End Role="Category_Tables" Type="Self.Category_Tables" Multiplicity="1" />
+    <End Role="ProductTables" Type="Self.ProductTable" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Category_Tables">
+        <PropertyRef Name="Category_ID" />
+      </Principal>
+      <Dependent Role="ProductTables">
+        <PropertyRef Name="CategoryID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="Green_LeafEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="AdminTables" EntityType="Self.AdminTable" />
+    <EntitySet Name="Category_Tables" EntityType="Self.Category_Tables" />
+    <EntitySet Name="ProductTables" EntityType="Self.ProductTable" />
+    <EntitySet Name="Promotion_Table" EntityType="Self.Promotion_Table" />
+    <EntitySet Name="BlogTables" EntityType="Self.BlogTable" />
+    <AssociationSet Name="FK_ProductTables_Category_Tables" Association="Self.FK_ProductTables_Category_Tables">
+      <End Role="Category_Tables" EntitySet="Category_Tables" />
+      <End Role="ProductTables" EntitySet="ProductTables" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

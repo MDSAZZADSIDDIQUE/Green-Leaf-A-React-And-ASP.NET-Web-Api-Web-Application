@@ -1,0 +1,236 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="AdminTables">
+          <Key>
+            <PropertyRef Name="Admin_ID" />
+          </Key>
+          <Property Name="Admin_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Admin_Name" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="Admin_Password" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="Admin_Email" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="Admin_Phone" Type="int" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Green Leaf .dbo.BlogTables' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="BlogTables">
+          <Key>
+            <PropertyRef Name="Admin_Blog_ID" />
+            <PropertyRef Name="Admin_Post" />
+          </Key>
+          <Property Name="Admin_Blog_ID" Type="int" Nullable="false" />
+          <Property Name="Admin_Post" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Category_Tables">
+          <Key>
+            <PropertyRef Name="Category_ID" />
+          </Key>
+          <Property Name="Category_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Category_Name" Type="nchar" MaxLength="10" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ProductTables">
+          <Key>
+            <PropertyRef Name="PlantProductID" />
+          </Key>
+          <Property Name="PlantProductID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ProductName" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="Description" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="CategoryID" Type="int" Nullable="false" />
+          <Property Name="Price" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Promotion_Table">
+          <Key>
+            <PropertyRef Name="PromotionID" />
+          </Key>
+          <Property Name="PromotionID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CampaignName" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="Description" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="StartDate" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="EndDate" Type="nchar" MaxLength="10" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_ProductTables_Category_Tables">
+          <End Role="Category_Tables" Type="Self.Category_Tables" Multiplicity="1" />
+          <End Role="ProductTables" Type="Self.ProductTables" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category_Tables">
+              <PropertyRef Name="Category_ID" />
+            </Principal>
+            <Dependent Role="ProductTables">
+              <PropertyRef Name="CategoryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ModelStoreContainer">
+          <EntitySet Name="AdminTables" EntityType="Self.AdminTables" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Category_Tables" EntityType="Self.Category_Tables" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ProductTables" EntityType="Self.ProductTables" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Promotion_Table" EntityType="Self.Promotion_Table" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="BlogTables" EntityType="Self.BlogTables" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+[BlogTables].[Admin_Blog_ID] AS [Admin_Blog_ID], 
+[BlogTables].[Admin_Post] AS [Admin_Post]
+FROM [dbo].[BlogTables] AS [BlogTables]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK_ProductTables_Category_Tables" Association="Self.FK_ProductTables_Category_Tables">
+            <End Role="Category_Tables" EntitySet="Category_Tables" />
+            <End Role="ProductTables" EntitySet="ProductTables" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="AdminTable">
+          <Key>
+            <PropertyRef Name="Admin_ID" />
+          </Key>
+          <Property Name="Admin_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Admin_Name" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Admin_Password" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Admin_Email" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Admin_Phone" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Category_Tables">
+          <Key>
+            <PropertyRef Name="Category_ID" />
+          </Key>
+          <Property Name="Category_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Category_Name" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="ProductTables" Relationship="Self.FK_ProductTables_Category_Tables" FromRole="Category_Tables" ToRole="ProductTables" />
+        </EntityType>
+        <EntityType Name="ProductTable">
+          <Key>
+            <PropertyRef Name="PlantProductID" />
+          </Key>
+          <Property Name="PlantProductID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProductName" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="CategoryID" Type="Int32" Nullable="false" />
+          <Property Name="Price" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Category_Tables" Relationship="Self.FK_ProductTables_Category_Tables" FromRole="ProductTables" ToRole="Category_Tables" />
+        </EntityType>
+        <EntityType Name="Promotion_Table">
+          <Key>
+            <PropertyRef Name="PromotionID" />
+          </Key>
+          <Property Name="PromotionID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CampaignName" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="StartDate" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="EndDate" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="BlogTable">
+          <Key>
+            <PropertyRef Name="Admin_Blog_ID" />
+            <PropertyRef Name="Admin_Post" />
+          </Key>
+          <Property Name="Admin_Blog_ID" Type="Int32" Nullable="false" />
+          <Property Name="Admin_Post" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_ProductTables_Category_Tables">
+          <End Role="Category_Tables" Type="Self.Category_Tables" Multiplicity="1" />
+          <End Role="ProductTables" Type="Self.ProductTable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category_Tables">
+              <PropertyRef Name="Category_ID" />
+            </Principal>
+            <Dependent Role="ProductTables">
+              <PropertyRef Name="CategoryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Green_LeafEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="AdminTables" EntityType="Self.AdminTable" />
+          <EntitySet Name="Category_Tables" EntityType="Self.Category_Tables" />
+          <EntitySet Name="ProductTables" EntityType="Self.ProductTable" />
+          <EntitySet Name="Promotion_Table" EntityType="Self.Promotion_Table" />
+          <EntitySet Name="BlogTables" EntityType="Self.BlogTable" />
+          <AssociationSet Name="FK_ProductTables_Category_Tables" Association="Self.FK_ProductTables_Category_Tables">
+            <End Role="Category_Tables" EntitySet="Category_Tables" />
+            <End Role="ProductTables" EntitySet="ProductTables" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ModelStoreContainer" CdmEntityContainer="Green_LeafEntities">
+          <EntitySetMapping Name="AdminTables">
+            <EntityTypeMapping TypeName="Model.AdminTable">
+              <MappingFragment StoreEntitySet="AdminTables">
+                <ScalarProperty Name="Admin_ID" ColumnName="Admin_ID" />
+                <ScalarProperty Name="Admin_Name" ColumnName="Admin_Name" />
+                <ScalarProperty Name="Admin_Password" ColumnName="Admin_Password" />
+                <ScalarProperty Name="Admin_Email" ColumnName="Admin_Email" />
+                <ScalarProperty Name="Admin_Phone" ColumnName="Admin_Phone" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Category_Tables">
+            <EntityTypeMapping TypeName="Model.Category_Tables">
+              <MappingFragment StoreEntitySet="Category_Tables">
+                <ScalarProperty Name="Category_ID" ColumnName="Category_ID" />
+                <ScalarProperty Name="Category_Name" ColumnName="Category_Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProductTables">
+            <EntityTypeMapping TypeName="Model.ProductTable">
+              <MappingFragment StoreEntitySet="ProductTables">
+                <ScalarProperty Name="PlantProductID" ColumnName="PlantProductID" />
+                <ScalarProperty Name="ProductName" ColumnName="ProductName" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Promotion_Table">
+            <EntityTypeMapping TypeName="Model.Promotion_Table">
+              <MappingFragment StoreEntitySet="Promotion_Table">
+                <ScalarProperty Name="PromotionID" ColumnName="PromotionID" />
+                <ScalarProperty Name="CampaignName" ColumnName="CampaignName" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BlogTables">
+            <EntityTypeMapping TypeName="Model.BlogTable">
+              <MappingFragment StoreEntitySet="BlogTables">
+                <ScalarProperty Name="Admin_Blog_ID" ColumnName="Admin_Blog_ID" />
+                <ScalarProperty Name="Admin_Post" ColumnName="Admin_Post" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="true" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
