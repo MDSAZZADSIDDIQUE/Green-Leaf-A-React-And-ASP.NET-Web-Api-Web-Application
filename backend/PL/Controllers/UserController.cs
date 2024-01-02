@@ -102,12 +102,12 @@ namespace PL.Controllers
         }
 
         [HttpGet]
-        [Route("api/FileDownloading/DownloadFile")]
-        public IHttpActionResult DownloadFile()
+        [Route("api/getuser/{fileName}")]
+        public IHttpActionResult DownloadFile([FromUri] string fileName)
         {
-            var fileName = "Screenshot.png";
+            fileName += ".jpg";
             var root = HttpContext.Current.Server.MapPath("~/App_Data");
-            var filePath = Path.Combine(root, "files", fileName);
+            var filePath = Path.Combine(root, "users", fileName);
 
             if (File.Exists(filePath))
             {

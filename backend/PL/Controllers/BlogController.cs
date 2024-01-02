@@ -60,7 +60,7 @@ namespace PL.Controllers
         {
             fileName += ".jpg";
             var root = HttpContext.Current.Server.MapPath("~/App_Data");
-            var filePath = Path.Combine(root, "products", fileName);
+            var filePath = Path.Combine(root, "blogs", fileName);
 
             if (File.Exists(filePath))
             {

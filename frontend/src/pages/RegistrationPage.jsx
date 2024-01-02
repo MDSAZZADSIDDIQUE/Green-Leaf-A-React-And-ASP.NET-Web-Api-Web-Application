@@ -131,6 +131,17 @@ const RegistrationPage = () => {
 
   return (
     <ThemeProvider theme={defaultTheme}>
+      <Box>
+        <Box className="flex justify-between p-5  text-xl">
+          <Box>
+            <Link to="/">Green Leaf</Link>
+          </Box>
+          <Box className="space-x-5">
+            <Link to="/login">Login</Link>
+            <Link to="/registration">Registration</Link>
+          </Box>
+        </Box>
+      </Box>
       <Grid container component="main" sx={{ height: "100vh" }}>
         <CssBaseline />
         <Grid
@@ -229,6 +240,7 @@ const RegistrationPage = () => {
                   <LocalizationProvider dateAdapter={AdapterDayjs}>
                     <DemoContainer components={["DatePicker"]}>
                       <DatePicker
+                        className="w-full"
                         label="Controlled picker"
                         value={dateOfBirth}
                         onChange={(newValue) => setDateOfBirth(newValue)}
@@ -264,7 +276,12 @@ const RegistrationPage = () => {
                 </Grid>
                 <Grid item xs={12}>
                   {errors.password?.message ? (
-                    <FormControl variant="outlined" error required>
+                    <FormControl
+                      variant="outlined"
+                      error
+                      required
+                      className="w-full "
+                    >
                       <InputLabel htmlFor="password">Password</InputLabel>
                       <OutlinedInput
                         id="password"
@@ -295,7 +312,11 @@ const RegistrationPage = () => {
                       </FormHelperText>
                     </FormControl>
                   ) : (
-                    <FormControl variant="outlined" required>
+                    <FormControl
+                      variant="outlined"
+                      required
+                      className=" w-full"
+                    >
                       <InputLabel htmlFor="password">Password</InputLabel>
                       <OutlinedInput
                         id="password"
@@ -319,13 +340,19 @@ const RegistrationPage = () => {
                         label="Password"
                         autoComplete="password"
                         {...register("password")}
+                        className="w-full"
                       />
                     </FormControl>
                   )}
                 </Grid>
                 <Grid item xs={12}>
                   {errors.confirmPassword?.message ? (
-                    <FormControl variant="outlined" error required>
+                    <FormControl
+                      variant="outlined"
+                      error
+                      required
+                      className=" w-full"
+                    >
                       <InputLabel htmlFor="confirm-password">
                         Confirm Password
                       </InputLabel>
@@ -352,13 +379,18 @@ const RegistrationPage = () => {
                         aria-describedby="confirm-password"
                         autoComplete="confirm-password"
                         {...register("confirmPassword")}
+                        className="w-full"
                       />
                       <FormHelperText id="component-helper-text">
                         {errors.confirmPassword?.message}
                       </FormHelperText>
                     </FormControl>
                   ) : (
-                    <FormControl variant="outlined" required>
+                    <FormControl
+                      variant="outlined"
+                      required
+                      className=" w-full"
+                    >
                       <InputLabel htmlFor="confirm-password">
                         Confirm Password
                       </InputLabel>

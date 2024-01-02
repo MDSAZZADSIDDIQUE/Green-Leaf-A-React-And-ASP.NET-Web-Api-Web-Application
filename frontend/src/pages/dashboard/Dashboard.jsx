@@ -21,6 +21,7 @@ import Chart from "./Chart";
 import Deposits from "./Deposits";
 import Orders from "./Orders";
 import Sidebar from "./Sidebar";
+import Avatar from "@mui/material/Avatar";
 
 function Copyright(props) {
   return (
@@ -126,11 +127,10 @@ export default function Dashboard() {
             >
               Dashboard
             </Typography>
-            <IconButton color="inherit">
-              <Badge badgeContent={4} color="secondary">
-                <NotificationsIcon />
-              </Badge>
-            </IconButton>
+            <Avatar
+              aria-label="recipe"
+              src={`https://localhost:44369/api/getuser/fqzzx5yazu2`}
+            />
           </Toolbar>
         </AppBar>
         <Drawer variant="permanent" open={open}>

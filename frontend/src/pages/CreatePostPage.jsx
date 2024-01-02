@@ -1,24 +1,48 @@
+import { yupResolver } from "@hookform/resolvers/yup";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
+import CloudUploadIcon from "@mui/icons-material/CloudUpload";
 import MenuIcon from "@mui/icons-material/Menu";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import MuiAppBar from "@mui/material/AppBar";
 import Badge from "@mui/material/Badge";
 import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
 import Container from "@mui/material/Container";
 import CssBaseline from "@mui/material/CssBaseline";
 import Divider from "@mui/material/Divider";
 import MuiDrawer from "@mui/material/Drawer";
+import FormControl from "@mui/material/FormControl";
 import Grid from "@mui/material/Grid";
 import IconButton from "@mui/material/IconButton";
+import InputLabel from "@mui/material/InputLabel";
 import Link from "@mui/material/Link";
 import List from "@mui/material/List";
+import MenuItem from "@mui/material/MenuItem";
+import Select from "@mui/material/Select";
+import TextField from "@mui/material/TextField";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import { ThemeProvider, createTheme, styled } from "@mui/material/styles";
-import * as React from "react";
-import PostCard from "../components/PostCard";
-import Sidebar from "./dashboard/Sidebar";
 import axios from "axios";
+import * as React from "react";
+import { useForm } from "react-hook-form";
+import * as yup from "yup";
+import Sidebar from "./dashboard/Sidebar";
+import { useNavigate } from "react-router-dom";
+
+const schema = yup.object({});
+
+const VisuallyHiddenInput = styled("input")({
+  clip: "rect(0 0 0 0)",
+  clipPath: "inset(50%)",
+  height: 1,
+  overflow: "hidden",
+  position: "absolute",
+  bottom: 0,
+  left: 0,
+  whiteSpace: "nowrap",
+  width: 1,
+});
 
 function Copyright(props) {
   return (
@@ -87,28 +111,44 @@ const Drawer = styled(MuiDrawer, {
 // TODO remove, this demo shouldn't need to reset the theme.
 const defaultTheme = createTheme();
 
-export default function PostPage() {
+const CreatePostPage = () => {
   const [open, setOpen] = React.useState(true);
   const toggleDrawer = () => {
     setOpen(!open);
   };
 
-  const [blogArticle, setBlogArticle] = React.useState(null);
-  const getProductList = async () => {
+  // Select
+  const [status, setStatus] = React.useState("");
+
+  const handleChange = (event) => {
+    setStatus(event.target.value);
+  };
+
+  // React Hook Form
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    resolver: yupResolver(schema),
+  });
+  const navigate = useNavigate();
+
+  const onSubmit = async (data) => {
+    console.log(data);
+    const formData = new FormData();
+    formData.append("caption", data.caption);
+    formData.append("image", data.image[0]);
     try {
-      const response = await axios.get("https://localhost:44369/api/getPost");
-      setBlogArticle(response.data);
+      await axios.post("https://localhost:44369/api/createPost", formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
     } catch (error) {
       console.error(error);
     }
   };
-
-  React.useEffect(() => {
-    getProductList();
-    console.log(blogArticle);
-  }, []);
-
-  React.useEffect(() => {}, [blogArticle]);
 
   return (
     <ThemeProvider theme={defaultTheme}>
@@ -182,8 +222,52 @@ export default function PostPage() {
           <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
             <Grid container spacing={3}>
               <Grid item xs={12}>
-                {blogArticle &&
-                  blogArticle.map((post) => <PostCard posts={post} />)}
+                <Box
+                  component="form"
+                  noValidate
+                  onSubmit={handleSubmit(onSubmit)}
+                  className="flex flex-col justify-center items-center h-screen"
+                >
+                  <Box className="flex flex-col w-96 space-y-5">
+                    <Typography variant="h4" className="text-center">
+                      Publish Blog
+                    </Typography>
+                    {errors.name?.message ? (
+                      <TextField
+                        error
+                        required
+                        id="name"
+                        label="Caption"
+                        name="name"
+                        autoComplete="name"
+                        autoFocus
+                        {...register("caption")}
+                        helperText={errors.name?.message}
+                      />
+                    ) : (
+                      <TextField
+                        required
+                        id="name"
+                        label="Caption"
+                        name="name"
+                        autoComplete="name"
+                        autoFocus
+                        {...register("caption")}
+                      />
+                    )}
+                    <Button
+                      component="label"
+                      variant="contained"
+                      startIcon={<CloudUploadIcon />}
+                    >
+                      Upload file
+                      <VisuallyHiddenInput type="file" {...register("image")} />
+                    </Button>
+                    <Button type="submit" variant="contained">
+                      Publish
+                    </Button>
+                  </Box>
+                </Box>
               </Grid>
             </Grid>
             <Copyright sx={{ pt: 4 }} />
@@ -192,4 +276,6 @@ export default function PostPage() {
       </Box>
     </ThemeProvider>
   );
-}
+};
+
+export default CreatePostPage;

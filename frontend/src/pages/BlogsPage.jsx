@@ -4,16 +4,9 @@ import NotificationsIcon from "@mui/icons-material/Notifications";
 import { default as MuiAppBar } from "@mui/material/AppBar";
 import Badge from "@mui/material/Badge";
 import Box from "@mui/material/Box";
-import Button from "@mui/material/Button";
-import Card from "@mui/material/Card";
-import CardActions from "@mui/material/CardActions";
-import CardContent from "@mui/material/CardContent";
-import CardMedia from "@mui/material/CardMedia";
-import Container from "@mui/material/Container";
 import CssBaseline from "@mui/material/CssBaseline";
 import Divider from "@mui/material/Divider";
 import MuiDrawer from "@mui/material/Drawer";
-import Grid from "@mui/material/Grid";
 import IconButton from "@mui/material/IconButton";
 import Link from "@mui/material/Link";
 import List from "@mui/material/List";
@@ -22,9 +15,8 @@ import Typography from "@mui/material/Typography";
 import { ThemeProvider, createTheme, styled } from "@mui/material/styles";
 import axios from "axios";
 import * as React from "react";
-import Sidebar from "./dashboard/Sidebar";
-import Rating from "@mui/material/Rating";
 import Blog from "./blog/Blog";
+import Sidebar from "./dashboard/Sidebar";
 
 function Copyright(props) {
   return (

@@ -12,51 +12,47 @@ using DAL.Entity_Framework;
 
 namespace BLL.Services
 {
-    internal class PostService
+    public class PostService
     {
-        public static bool AddProduct(string root, MultipartFormDataStreamProvider provider, string id)
+        public static bool CreatePost(string root, MultipartFormDataStreamProvider provider, string id)
         {
-            var productDto = new ProductDto()
+            var postDto = new PostDto()
             {
-                name = provider.FormData["name"],
-                description = provider.FormData["description"],
-                price = float.Parse(provider.FormData["price"]),
-                category = provider.FormData["category"],
-                status = provider.FormData["status"],
-                date_added = DateTime.Now,
-                seller = int.Parse(id)
+                caption = provider.FormData["caption"],
+                created_at = DateTime.Now,
+                user_id = 5
             };
             foreach (var file in provider.FileData)
             {
                 var originalFileName = file.Headers.ContentDisposition.FileName.Trim('"');
                 var uniqueFileName = Path.GetRandomFileName();
                 uniqueFileName = uniqueFileName.Replace(".", "");
-                productDto.image = uniqueFileName;
+                postDto.image = uniqueFileName;
                 uniqueFileName += Path.GetExtension(originalFileName);
                 var sourceFileName = file.LocalFileName;
-                var destFileName = Path.Combine(root, "products", uniqueFileName);
+                var destFileName = Path.Combine(root, "posts", uniqueFileName);
                 File.Move(sourceFileName, destFileName);
             }
             var mapperConfiguration =
-                new MapperConfiguration(configure => { configure.CreateMap<ProductDto, product>(); });
+                new MapperConfiguration(configure => { configure.CreateMap<PostDto, post>(); });
             var mapper = new Mapper(mapperConfiguration);
-            var product = mapper.Map<product>(productDto);
-            return DataAccessFactory.ProductDataAccess().Add(product);
+            var post = mapper.Map<post>(postDto);
+            return DataAccessFactory.PostDataAccess().Add(post);
         }
 
-        public static List<ProductDto> Shop()
+        public static List<PostDto> GetPosts()
         {
-            var products = DataAccessFactory.ProductDataAccess().Get();
-            var productDtos = new List<ProductDto>();
-            foreach (var product in products)
+            var posts = DataAccessFactory.PostDataAccess().Get();
+            var postDtos = new List<PostDto>();
+            foreach (var post in posts)
             {
                 var mapperConfiguration =
-                    new MapperConfiguration(configure => { configure.CreateMap<product, ProductDto>(); });
+                    new MapperConfiguration(configure => { configure.CreateMap<post, PostDto>(); });
                 var mapper = new Mapper(mapperConfiguration);
-                productDtos.Add(mapper.Map<ProductDto>(product));
+                postDtos.Add(mapper.Map<PostDto>(post));
             }
 
-            return productDtos;
+            return postDtos;
         }
     }
 }
