@@ -4,6 +4,8 @@
 <img src="./ui_design/Screenshot (29).png">
 <img src="./ui_design/Screenshot (30).png">
 <img src="./ui_design/Screenshot (31).png">
+<img src="./ui_design/Screenshot (43).png">
+<img src="./ui_design/Screenshot (44).png">
 <img src="./ui_design/Screenshot (32).png">
 <img src="./ui_design/Screenshot (33).png">
 <img src="./ui_design/Screenshot (34).png">
