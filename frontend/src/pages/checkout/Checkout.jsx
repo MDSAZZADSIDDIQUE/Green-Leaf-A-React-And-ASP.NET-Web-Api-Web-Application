@@ -21,7 +21,7 @@ function Copyright() {
     <Typography variant="body2" color="text.secondary" align="center">
       {"Copyright © "}
       <Link color="inherit" href="https://mui.com/">
-        Your Website
+        Green Leaf
       </Link>{" "}
       {new Date().getFullYear()}
       {"."}
@@ -69,7 +69,7 @@ export default function Checkout() {
       >
         <Toolbar>
           <Typography variant="h6" color="inherit" noWrap>
-            Company name
+            Green Leaf
           </Typography>
         </Toolbar>
       </AppBar>
@@ -98,9 +98,11 @@ export default function Checkout() {
                 confirmation, and will send you an update when your order has
                 shipped.
               </Typography>
-              <Link to="/yourorder">
-                <Button variant="contained">Your Orders</Button>
-              </Link>
+              <Box className="mt-5">
+                <Link to="/yourorder">
+                  <Button variant="contained">Your Orders</Button>
+                </Link>
+              </Box>
             </React.Fragment>
           ) : (
             <React.Fragment>

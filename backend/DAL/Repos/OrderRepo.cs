@@ -17,7 +17,18 @@ namespace DAL.Repos
 
         public order Get(int id)
         {
-            throw new NotImplementedException();
+            var order = GreenLeafDatabase.orders.Find(id);
+            if (order.status.Equals("pending"))
+            {
+                order.status = "shipped";
+            }
+            else
+            {
+                order.status = "delivered";
+            }
+
+            GreenLeafDatabase.SaveChanges();
+            return order;
         }
 
         public bool Add(order obj)
@@ -27,7 +38,6 @@ namespace DAL.Repos
 
         public void Edit(order obj)
         {
-            throw new NotImplementedException();
         }
 
         public void Delete(int id)

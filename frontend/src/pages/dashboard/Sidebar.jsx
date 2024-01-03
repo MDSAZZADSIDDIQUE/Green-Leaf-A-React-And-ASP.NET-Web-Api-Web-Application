@@ -128,6 +128,18 @@ const Sidebar = () => {
           </List>
         </Collapse>
       </Link>
+      <Link to="/acceptorder">
+        <Collapse in={open} timeout="auto" unmountOnExit>
+          <List component="div" disablePadding>
+            <ListItemButton sx={{ pl: 4 }}>
+              <ListItemIcon>
+                <StoreRoundedIcon />
+              </ListItemIcon>
+              <ListItemText primary="Accept Order" />
+            </ListItemButton>
+          </List>
+        </Collapse>
+      </Link>
 
       {/* Blog */}
       <ListItemButton onClick={handleBlogClick}>

@@ -48,14 +48,14 @@ const ShopPage = () => {
           {rows &&
             rows.map((card) => (
               <Grid item key={card.id} xs={4}>
-                <Link to={`/productpage/${card.id}`}>
-                  <Card
-                    sx={{
-                      height: "100%",
-                      display: "flex",
-                      flexDirection: "column",
-                    }}
-                  >
+                <Card
+                  sx={{
+                    height: "100%",
+                    display: "flex",
+                    flexDirection: "column",
+                  }}
+                >
+                  <Link to={`/productpage/${card.id}`}>
                     <CardMedia
                       component="div"
                       sx={{
@@ -63,28 +63,29 @@ const ShopPage = () => {
                       }}
                       image={`https://localhost:44369/api/getproductimage/${card.image}`}
                     />
-                    <CardContent sx={{ flexGrow: 1 }} className="space-y-1">
-                      <Typography gutterBottom variant="h5">
-                        {card.name}
-                      </Typography>
-                      <Typography variant="h6">
-                        ৳ {card.price.toFixed(2)}
-                      </Typography>
-                      <Typography variant="subtitle1">{card.status}</Typography>
-                      <Rating name="read-only" value={value} readOnly />
-                    </CardContent>
-                    <CardActions>
-                      <Button
-                        variant="contained"
-                        startIcon={<ShoppingCartRoundedIcon />}
-                        fullWidth
-                        onClick={() => addToCart(card.id)}
-                      >
-                        Add item
-                      </Button>
-                    </CardActions>
-                  </Card>
-                </Link>
+                  </Link>
+
+                  <CardContent sx={{ flexGrow: 1 }} className="space-y-1">
+                    <Typography gutterBottom variant="h5">
+                      {card.name}
+                    </Typography>
+                    <Typography variant="h6">
+                      ৳ {card.price.toFixed(2)}
+                    </Typography>
+                    <Typography variant="subtitle1">{card.status}</Typography>
+                    <Rating name="read-only" value={value} readOnly />
+                  </CardContent>
+                  <CardActions>
+                    <Button
+                      variant="contained"
+                      startIcon={<ShoppingCartRoundedIcon />}
+                      fullWidth
+                      onClick={() => addToCart(card.id)}
+                    >
+                      Add item
+                    </Button>
+                  </CardActions>
+                </Card>
               </Grid>
             ))}
         </Grid>

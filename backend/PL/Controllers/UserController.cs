@@ -92,7 +92,7 @@ namespace PL.Controllers
                 {
                     id = cookie["id"].Value;
                 }
-                var userDto = UserService.GetUserProfile("1");
+                var userDto = UserService.GetUserProfile("5");
                 return userDto != null ? Request.CreateResponse(HttpStatusCode.OK, userDto) : Request.CreateErrorResponse(HttpStatusCode.NotFound, "User not found.");
             }
             catch (System.Exception e)

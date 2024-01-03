@@ -27,6 +27,8 @@ import UserDashboardPage from "./pages/UserDashboardPage.jsx";
 import YourOrderListPage from "./pages/YourOrderListPage.jsx";
 import Checkout from "./pages/checkout/Checkout.jsx";
 import ProductPage from "./pages/ProductPage.jsx";
+import AcceptOrder from "./pages/AcceptOrder.jsx";
+import ProfilePage from "./pages/ProfilePage.jsx";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -50,6 +52,8 @@ const router = createBrowserRouter(
       <Route path="/postlist" element={<PostListPage />} />
       <Route path="/blogpostpage/:blogID" element={<BlogPostPage />} />
       <Route path="/productpage/:productID" element={<ProductPage />} />
+      <Route path="/acceptorder" element={<AcceptOrder />} />
+      <Route path="/userprofile" element={<ProfilePage />} />
     </Route>
   )
 );

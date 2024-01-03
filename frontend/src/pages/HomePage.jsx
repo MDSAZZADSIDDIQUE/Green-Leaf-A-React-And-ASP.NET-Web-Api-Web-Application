@@ -29,7 +29,7 @@ const HomePage = () => {
             Welcome to the kingdom for Nature Enthusiast
           </h1>
           <button
-            className="w-1/3 p-5 bg-blue-950 rounded-lg shadow-white shadow-2xl"
+            className="w-1/3 p-5 bg-blue-950 rounded-lg"
             variant="contained"
           >
             Explore Now

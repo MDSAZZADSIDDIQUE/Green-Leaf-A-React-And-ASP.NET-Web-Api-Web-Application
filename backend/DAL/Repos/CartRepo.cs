@@ -19,7 +19,7 @@ namespace DAL.Repos
 
         public cart Get(int id)
         {
-            throw new NotImplementedException();
+            return GreenLeafDatabase.carts.Find(id);
         }
 
         public bool Add(cart obj)
@@ -35,7 +35,8 @@ namespace DAL.Repos
 
         public void Delete(int id)
         {
-            throw new NotImplementedException();
+            var cart = Get(id);
+            GreenLeafDatabase.carts.Remove(cart);
         }
 
         public cart AddToClass(cart obj)

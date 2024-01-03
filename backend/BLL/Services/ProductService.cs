@@ -147,5 +147,15 @@ namespace BLL.Services
             var productDto = mapper.Map<ProductDto>(product);
             return productDto;
         }
+
+        public static void DeleteCartItem(string cartItemId)
+        {
+            DataAccessFactory.CartItemsDataAccess().Delete(int.Parse(cartItemId));
+        }
+
+        public static void EditOrder(string orderId)
+        {
+            DataAccessFactory.OrderDataAccess().Get(int.Parse(orderId));
+        }
     }
 }

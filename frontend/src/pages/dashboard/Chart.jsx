@@ -15,23 +15,47 @@ function createData(time, amount) {
 }
 
 const data = [
-  createData("00:00", 0),
-  createData("03:00", 300),
-  createData("06:00", 600),
-  createData("09:00", 800),
-  createData("12:00", 1500),
-  createData("15:00", 2000),
-  createData("18:00", 2400),
-  createData("21:00", 2400),
-  createData("24:00", undefined),
+  createData("Snake Plant", 3),
+  createData("Fiddle Leaf", 2),
+  createData("String of Pearls", 3),
+  createData("Monstera Deliciosa", 1),
+  createData("Spider Plant", 5),
 ];
 
 const Chart = () => {
   const theme = useTheme();
+  const [rows, setRows] = React.useState(null);
 
+  const [treeSold, setTreeSold] = React.useState(0);
+
+  const getProductList = async () => {
+    try {
+      const response = await axios.get("https://localhost:44369/api/order");
+      setRows(response.data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  React.useEffect(() => {
+    getProductList();
+  }, []);
+
+  React.useEffect(() => {
+    console.log(rows);
+    console.log(treeSold);
+    if (rows != null) {
+      rows.forEach((element) => {
+        setTreeSold(treeSold + element.amount);
+      });
+    }
+    setTreeSold(2464.56);
+  }, [rows]);
+
+  React.useEffect(() => {}, [rows]);
   return (
     <React.Fragment>
-      <Title>Today</Title>
+      <Title>Product sold</Title>
       <ResponsiveContainer>
         <LineChart
           data={data}
@@ -60,7 +84,7 @@ const Chart = () => {
                 ...theme.typography.body1,
               }}
             >
-              Sales ($)
+              Number of products
             </Label>
           </YAxis>
           <Line

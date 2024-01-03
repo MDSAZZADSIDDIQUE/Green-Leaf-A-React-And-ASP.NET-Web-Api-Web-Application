@@ -3,6 +3,7 @@ import Button from "@mui/material/Button";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import * as React from "react";
+import { Link } from "react-router-dom";
 
 const AvatarMenu = () => {
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -37,8 +38,16 @@ const AvatarMenu = () => {
           "aria-labelledby": "basic-button",
         }}
       >
-        <MenuItem onClick={handleClose}>Profile</MenuItem>
-        <MenuItem onClick={handleClose}>Logout</MenuItem>
+        <MenuItem>
+          <Link onClick={handleClose} to="/userprofile">
+            Profile
+          </Link>
+        </MenuItem>
+        <MenuItem>
+          <Link onClick={handleClose} to="/login">
+            Logout
+          </Link>
+        </MenuItem>
       </Menu>
     </div>
   );

@@ -158,5 +158,35 @@ namespace PL.Controllers
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, e);
             }
         }
+
+        [HttpGet]
+        [Route("api/deletecartitem/{cartId}")]
+        public HttpResponseMessage DeleteCartItem([FromUri] string cartId)
+        {
+            try
+            {
+                ProductService.DeleteCartItem(cartId);
+                return Request.CreateResponse(HttpStatusCode.OK);
+            }
+            catch (Exception e)
+            {
+                return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, e);
+            }
+        }
+
+        [HttpGet]
+        [Route("api/editorder/{orderId}")]
+        public HttpResponseMessage EditOrder([FromUri] string orderId)
+        {
+            try
+            {
+                ProductService.EditOrder(orderId);
+                return Request.CreateResponse(HttpStatusCode.OK);
+            }
+            catch (Exception e)
+            {
+                return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, e);
+            }
+        }
     }
 }
